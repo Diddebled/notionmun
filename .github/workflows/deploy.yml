@@ -1,0 +1,67 @@
+name: Publish NotionMUN to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  import-source:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Import the prepared source on first publish
+        shell: bash
+        run: |
+          if [ -f notionmun-source.zip ]; then
+            unzip -q notionmun-source.zip -d "$RUNNER_TEMP/notionmun-import"
+            rsync -a --exclude='.github/' "$RUNNER_TEMP/notionmun-import/notionmun-source/" ./
+            git rm notionmun-source.zip
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add --all
+            git commit -m 'Import NotionMUN website source'
+            git push origin HEAD:main
+          fi
+
+  deploy:
+    needs: import-source
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: main
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Build for the GitHub Pages address
+        run: npm run build
+        env:
+          VITE_BASE_PATH: /notionmun/
+          VITE_ROUTER_MODE: hash
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        with:
+          path: dist
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
