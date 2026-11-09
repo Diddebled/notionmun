@@ -1,0 +1,14 @@
+{
+  "name": "Flagpack",
+  "creator": "Yummygum",
+  "copyright": "Copyright (c) 2021 Yummygum",
+  "license": "MIT",
+  "repositoryUrl": "https://github.com/Yummygum/flagpack-core",
+  "revision": "6e57695337a46831d3772ab4945d7a7f8e25d5c1",
+  "sourceUrl": "https://github.com/Yummygum/flagpack-core/tree/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l",
+  "licenseUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/LICENSE",
+  "localLicenseUrl": "/licenses/flagpack-MIT.txt",
+  "verifiedOn": "2026-10-30",
+  "upstreamFiles": { "MCO": "MC.svg" },
+  "historicalIllustrations": ["AHE", "BYZ", "OTT", "PRU", "ROE"]
+}

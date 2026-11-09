@@ -1,0 +1,236 @@
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Timer from "./Timer";
+import Queue from "./Queue";
+import Flag from "./Flag";
+import AppTopBar from "./AppTopBar";
+import ShortcutLegend from "./ShortcutLegend";
+import ConferenceService from "../services/ConferenceService";
+import LiveSessionService from "../services/LiveSessionService";
+import { useDaisShortcuts } from "../hooks/useDaisShortcuts";
+import { Undo2 } from "lucide-react";
+
+// Shared by the real /session route and the landing page's hero preview,
+// which sits outside .app-shell. `linked` enables real navigation only on the
+// route, so the preview can't route a visitor off the marketing page.
+export default function SessionBoard({
+  committeeLabel,
+  initialSpeaker = null,
+  initialQueue = [],
+  initialHistory = [],
+  onSessionChange,
+  speechLength = 72,
+  activeMotion,
+  suggestions = [],
+  linked = true,
+  // Padding for everything below the top bar, so the bar itself can run edge to edge.
+  contentClassName = "",
+}) {
+  // The queue is the single source of truth for who's speaking: whoever is
+  // at the front is the current speaker, grabbed off the top rather than
+  // tracked as separate state that could drift out of sync with the queue
+  // itself. A distinct initialSpeaker (the landing hero's demo data) is just
+  // prepended ahead of the rest so it becomes that same front-of-queue entry.
+  const [queue, setQueue] = useState(() =>
+    initialSpeaker ? [initialSpeaker, ...initialQueue] : initialQueue
+  );
+  const currentSpeaker = queue[0] ?? null;
+  const [history, setHistory] = useState(initialHistory);
+  // Tracked by id, not position, so the selection follows the delegate when
+  // Next or a reorder shifts the queue under it.
+  const [selectedId, setSelectedId] = useState(null);
+  const [legendOpen, setLegendOpen] = useState(false);
+
+  const navigate = useNavigate();
+  const timerRef = useRef(null);
+  const queueRef = useRef(null);
+  // Single-slot "undo the last thing" - not a history stack. Holds a plain
+  // { queue, history } snapshot taken right before the most recent mutation,
+  // from every mutation site (mouse or keyboard) - see nextSpeaker,
+  // removeSelected, and the Queue element's wrapped setQueue below. A ref
+  // (not state) since it doesn't need to trigger a render on its own, only
+  // the undo it drives does.
+  const undoRef = useRef(null);
+
+  // The Queue component renders the full queue - the current speaker is
+  // just whoever sits at index 0, so moving them (e.g. to the bottom) hands
+  // "currently speaking" off to whoever ends up on top, same as any other
+  // reorder.
+  const clampedQueueIndex = queue.findIndex((entry) => entry.id === selectedId);
+  const selectAt = (index) => setSelectedId(queue[index]?.id ?? null);
+  // Functional, so held-down arrow keys (several presses before a render) all count.
+  const moveSelection = (step) =>
+    setSelectedId((id) => {
+      const index = queue.findIndex((entry) => entry.id === id);
+      const next = index < 0 ? 0 : Math.min(queue.length - 1, Math.max(0, index + step));
+      return queue[next]?.id ?? null;
+    });
+
+  // A new speaker at the front, by any route other than Next (remove, move,
+  // undo), gets a fresh timer, so one delegate's time is never credited to
+  // the next.
+  const currentId = currentSpeaker?.id ?? null;
+  const previousSpeakerRef = useRef(currentId);
+  useEffect(() => {
+    if (previousSpeakerRef.current === currentId) return;
+    previousSpeakerRef.current = currentId;
+    timerRef.current?.reset();
+  }, [currentId]);
+
+  const onSessionChangeRef = useRef(onSessionChange);
+  useEffect(() => {
+    onSessionChangeRef.current = onSessionChange;
+  });
+  useEffect(() => {
+    onSessionChangeRef.current?.({ queue, history });
+  }, [queue, history]);
+
+  // Only set once the chair hits "Go Live" on /cloud - a purely local
+  // session never reads this and never touches Firestore.
+  const liveSessionId = LiveSessionService.getActiveSessionId();
+
+  useEffect(() => {
+    if (!liveSessionId) return;
+    LiveSessionService.publish(liveSessionId, { currentSpeaker, queue });
+  }, [liveSessionId, currentSpeaker, queue]);
+
+  // The one function both the mouse "Next" button and the keyboard shortcut
+  // (via Timer's triggerNext) funnel through, so snapshotting here covers
+  // undo for both.
+  const nextSpeaker = (elapsedSeconds = 0) => {
+    if (queue.length === 0) return;
+
+    // The speaker's prior record rides along so undo also un-counts the speech.
+    const delegate = ConferenceService.getDelegate(queue[0].id);
+    const speech = delegate && {
+      id: delegate.id,
+      hasSpoken: delegate.hasSpoken,
+      speakingTime: delegate.speakingTime,
+    };
+
+    undoRef.current = { queue, history, speech };
+    ConferenceService.markSpoken(queue[0].id, Math.round(elapsedSeconds));
+    setHistory((prev) => [...prev, queue[0]]);
+    setQueue((prev) => prev.slice(1));
+  };
+
+  // Drives the advance through Timer's own nextSpeaker (via triggerNext)
+  // rather than calling the SessionBoard nextSpeaker above directly - that's
+  // the only path that computes real elapsed speaking time, same as the
+  // mouse "Next" button.
+  function recognizeNext() {
+    timerRef.current?.triggerNext();
+  }
+
+  function removeSelected() {
+    if (clampedQueueIndex < 0) return;
+    undoRef.current = { queue, history };
+    setSelectedId(queue[clampedQueueIndex + 1]?.id ?? queue[clampedQueueIndex - 1]?.id ?? null);
+    setQueue((prev) => prev.filter((_, i) => i !== clampedQueueIndex));
+  }
+
+  function performUndo() {
+    const snapshot = undoRef.current;
+    if (!snapshot) return;
+    undoRef.current = null;
+    if (snapshot.speech) ConferenceService.restoreSpeaking(snapshot.speech.id, snapshot.speech);
+    setQueue(snapshot.queue);
+    setHistory(snapshot.history);
+  }
+
+  useDaisShortcuts(
+    "speakerList",
+    {
+      "speakerList.recognizeNext": recognizeNext,
+      "speakerList.toggleTimer": () => timerRef.current?.toggleRunning(),
+      "speakerList.resetTimer": () => timerRef.current?.reset(),
+      "speakerList.removeSelected": removeSelected,
+      "speakerList.addSpeaker": () => queueRef.current?.focusAddInput(),
+      "speakerList.moveUp": () => moveSelection(-1),
+      "speakerList.moveDown": () => moveSelection(1),
+      "global.undo": performUndo,
+      "global.legend": () => setLegendOpen((open) => !open),
+      "global.viewRollCall": () => navigate("/rollcall"),
+      "global.viewMotions": () => navigate("/motion"),
+      "global.viewGeneralVoting": () => navigate("/vote"),
+    },
+    { active: linked }
+  );
+
+  const estimatedMinutes = Math.ceil((queue.length * speechLength) / 60);
+
+  return (
+    <div className="flex h-full min-h-0 flex-col">
+      <AppTopBar
+        committeeLabel={committeeLabel}
+        linked={linked}
+        current="/session"
+        onShowShortcuts={() => setLegendOpen(true)}
+      />
+
+      <div className={`session-board-grid grid min-h-0 flex-1 grid-cols-1 gap-6 ${contentClassName} xl:grid-cols-[minmax(0,1fr)_440px] 2xl:grid-cols-[minmax(0,1fr)_480px]`}>
+        <div className="flex h-full min-h-0 flex-col gap-6 overflow-y-auto rounded-none border border-[var(--app-border)] bg-[var(--app-panel)] p-5 sm:p-6 lg:p-8 shadow-[0_25px_80px_rgba(0,0,0,.35)]">
+          <div className="session-speaker-heading flex items-start justify-between gap-4">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.26em] text-[var(--app-text-muted)]">Active speech</p>
+              <h1 className="mt-3 flex items-center gap-3 text-2xl sm:text-xl sm:text-4xl font-semibold tracking-[-0.03em] text-[var(--app-text)]">
+                <Flag countryCode={currentSpeaker?.countryCode} className="text-xl sm:text-2xl" />
+                {currentSpeaker?.country ?? "No speaker selected"}
+              </h1>
+            </div>
+            <div className="flex items-center gap-2"><span className="rounded-none border border-[var(--app-border)] bg-[var(--app-chip)] px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-[var(--app-text-secondary)]">{activeMotion}</span>
+              <button className="icon-button" aria-label="Undo queue change" title="Undo queue change" onClick={performUndo}><Undo2 size={17} /></button></div>
+          </div>
+
+          <div className="flex flex-1 flex-col items-center justify-center gap-12">
+            <Timer
+              ref={timerRef}
+              initialTime={speechLength}
+              onNext={nextSpeaker}
+              showNext
+              nextDisabled={!currentSpeaker}
+              onAnchorChange={(anchor) => liveSessionId && LiveSessionService.publishTimerAnchor(liveSessionId, anchor)}
+            />
+          </div>
+
+          <div className="mt-auto grid grid-cols-3 gap-5 sm:gap-4">
+            <div className="rounded-none border border-[var(--app-border)] bg-[var(--app-chip)] px-6 py-4 xl:py-5 text-center">
+              <p className="text-2xl sm:text-xl sm:text-4xl font-semibold">
+                {estimatedMinutes} min
+              </p>
+              <p className="mt-2 text-[9px] uppercase tracking-[0.18em] text-[var(--app-text-muted)]">Estimated</p>
+            </div>
+            <div className="rounded-none border border-[var(--app-border)] bg-[var(--app-chip)] px-6 py-4 xl:py-5 text-center">
+              <p className="text-2xl sm:text-xl sm:text-4xl font-semibold">
+                {history.length}
+              </p>
+              <p className="mt-2 text-[9px] uppercase tracking-[0.18em] text-[var(--app-text-muted)]">Spoken</p>
+            </div>
+            <div className="rounded-none border border-[var(--app-border)] bg-[var(--app-chip)] px-6 py-4 xl:py-5 text-center">
+              <p className="text-2xl sm:text-xl sm:text-4xl font-semibold">
+                {Math.max(queue.length - 1, 0)}
+              </p>
+              <p className="mt-2 text-[9px] uppercase tracking-[0.18em] text-[var(--app-text-muted)]">Queued</p>
+            </div>
+          </div>
+        </div>
+
+        <Queue
+          ref={queueRef}
+          queue={queue}
+          setQueue={(next) => {
+            undoRef.current = { queue, history };
+            setQueue(next);
+          }}
+          suggestions={suggestions}
+          selectedIndex={clampedQueueIndex}
+          onSelectIndex={selectAt}
+        />
+      </div>
+
+      {linked && (
+        <ShortcutLegend scopeName="speakerList" open={legendOpen} onClose={() => setLegendOpen(false)} />
+      )}
+    </div>
+  );
+}

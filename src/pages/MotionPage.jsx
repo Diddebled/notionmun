@@ -1,0 +1,315 @@
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AppTopBar from "../components/AppTopBar";
+import MotionInput from "../components/MotionInput";
+import MotionDropdownForm from "../components/MotionDropdownForm";
+import MotionLog from "../components/MotionLog";
+import VotingPanel from "../components/VotingPanel";
+import SpeakingTimeSelector from "../components/SpeakingTimeSelector";
+import NoCommitteeModal from "../components/NoCommitteeModal";
+import ShortcutLegend from "../components/ShortcutLegend";
+import { formatMotionSummary } from "../utils/motionSummary";
+import { buildInitialGroups, adjustVoteGroups, restoreMotionWork, toggleAbstainGroups } from "../utils/voteGroups";
+import ConferenceService from "../services/ConferenceService";
+import LiveSessionService from "../services/LiveSessionService";
+import { getMotions, canonicalLabel } from "../motionPresets";
+import { getMotionInputMode } from "../motionInputMode";
+import { useDaisShortcuts } from "../hooks/useDaisShortcuts";
+import { motionVoteKey } from "../committeeCaches";
+import { attendanceCounts } from "../utils/attendance";
+import { randomId } from "../utils/randomId";
+import { dais as session } from "../utils/storage";
+
+// Persist the motion work across refreshes and browser sessions. The tally
+// is dropped once attendance no longer matches; the log never is (see
+// restoreMotionWork).
+function loadMotionWork(committeeId, delegateCount, absentCount) {
+  return restoreMotionWork(session.getJSON(motionVoteKey(committeeId)), delegateCount, absentCount);
+}
+
+// Every logged motion gets an id, so selection, voting, and deletion follow
+// the entry itself rather than its position (precedence inserts shift it).
+function withId(entry) {
+  return entry.id ? entry : { ...entry, id: randomId() };
+}
+
+// Inserts by precedence, so a Point of Order jumps to the top while same-rank
+// motions still read newest-first. Unrecognized text sinks to the bottom.
+function insertByPrecedence(list, entry, precedenceByLabel) {
+  const rank = entry.motion != null ? (precedenceByLabel.get(entry.motion) ?? Infinity) : Infinity;
+  const at = list.findIndex((existing) => {
+    const existingRank = existing.motion != null ? (precedenceByLabel.get(existing.motion) ?? Infinity) : Infinity;
+    return existingRank >= rank;
+  });
+  const index = at === -1 ? list.length : at;
+  return [...list.slice(0, index), entry, ...list.slice(index)];
+}
+
+export default function MotionPage() {
+  const navigate = useNavigate();
+  const committee = ConferenceService.getActiveCommittee();
+  const delegateCount = committee?.delegates.length ?? 0;
+  const { present: presentCount, absent: absentCount } = attendanceCounts(committee?.delegates ?? []);
+  // Read once per mount rather than re-parsed on every render.
+  const [saved] = useState(() =>
+    committee ? loadMotionWork(committee.id, delegateCount, absentCount) : restoreMotionWork(null, 0, 0)
+  );
+
+  // Scope MotionInput's matching to delegations actually in this committee
+  // (including non-country ones like press corps), not the full ISO list.
+  const delegations = committee?.delegates.map((d) => ({ name: d.countryDisplay, code: d.countryCode })) ?? [];
+
+  // Read once at render time, same as getMotions() below - routes here fully
+  // remount on navigation, so no cross-mount reactivity is needed.
+  const inputMode = getMotionInputMode();
+
+  // Read once per mount (see motionPresets.js) - used to rank the motion log
+  // by precedence (array order = disruptiveness rank, see insertByPrecedence).
+  const precedenceByLabel = useMemo(
+    () => new Map(getMotions().map((m, i) => [canonicalLabel(m), i])),
+    []
+  );
+
+  const [motionText, setMotionText] = useState(saved.motionText);
+  const [groups, setGroups] = useState(() => saved.groups ?? buildInitialGroups(presentCount, absentCount));
+  const [motionLog, setMotionLog] = useState(() => saved.motionLog.map(withId));
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  // Hidden until a chair explicitly opens voting on a logged motion - null
+  // means hidden, an id means "voting is open for this motion". Saved with
+  // the tally, so a refresh mid-vote reopens the panel instead of hiding it.
+  const [votingMotionId, setVotingMotionId] = useState(saved.votingMotionId);
+  const votingMotion = motionLog.find((entry) => entry.id === votingMotionId) ?? null;
+
+  // Distinct from the vote-bloc `selectedIndex` above (different concept:
+  // this is "which logged motion the keyboard cursor is on", kept separate
+  // rather than conflated with it).
+  const [selectedMotionId, setSelectedMotionId] = useState(null);
+  const [legendOpen, setLegendOpen] = useState(false);
+  const motionInputRef = useRef(null);
+  // Single-slot undo (not a history stack) - same pattern as SessionBoard.jsx
+  // and RollCallPage.jsx. Covers the last deleted motion only.
+  const undoRef = useRef(null);
+
+  const selectedFound = motionLog.findIndex((entry) => entry.id === selectedMotionId);
+  const clampedMotionIndex = selectedFound >= 0 ? selectedFound : motionLog.length > 0 ? 0 : -1;
+  // Functional, so held-down arrow keys all count.
+  const moveMotionSelection = (step) =>
+    setSelectedMotionId((id) => {
+      const found = motionLog.findIndex((entry) => entry.id === id);
+      const index = found >= 0 ? found : 0;
+      return motionLog[Math.min(motionLog.length - 1, Math.max(0, index + step))]?.id ?? null;
+    });
+  const selectedMotion = clampedMotionIndex >= 0 ? motionLog[clampedMotionIndex] : null;
+
+  // Only set once the chair hits "Go Live" on /cloud - a purely local
+  // session never reads this and never touches Firestore.
+  const liveSessionId = LiveSessionService.getActiveSessionId();
+
+  function publishActiveMotion(entry) {
+    if (!liveSessionId) return;
+    LiveSessionService.publish(liveSessionId, { activeMotionLabel: entry?.motion ?? null });
+  }
+
+  // Opening voting starts a fresh tally rather than carrying one over, and
+  // marks this as the active motion, since reopening an older motion means
+  // bringing it back to the floor.
+  // A vote already open on this motion is left alone, so a stray Enter or V
+  // mid-count can't wipe the tally.
+  function startVoting(entry) {
+    if (entry.id === votingMotionId) return;
+    setVotingMotionId(entry.id);
+    setSelectedMotionId(entry.id);
+    setGroups(buildInitialGroups(presentCount, absentCount));
+    ConferenceService.setActiveMotion(entry);
+    publishActiveMotion(entry);
+  }
+
+  // The newest motion becomes active immediately, since procedural motions
+  // govern the floor as soon as they're moved. Inserted by precedence, so a
+  // Point of Order outranks whatever is already on the floor.
+  function handleMotionSubmit(meta) {
+    const entry = withId(meta);
+    setMotionLog((prev) => insertByPrecedence(prev, entry, precedenceByLabel));
+    ConferenceService.setActiveMotion(entry);
+    publishActiveMotion(entry);
+  }
+
+  // votingMotion is already the committee's active motion (set in
+  // startVoting) - re-setting here is just belt-and-suspenders so /session
+  // picks up this exact passed motion even if something else changed the
+  // active motion mid-vote.
+  // seedProposer is the delegation MotionInput parsed off the motion text
+  // (e.g. "Malaysia moves for a moderated caucus...") - SessionPage resolves
+  // it against the roster and seeds the queue, so the mover doesn't have to
+  // be re-typed into the queue by hand once their motion passes.
+  function continueToSession() {
+    ConferenceService.setActiveMotion(votingMotion);
+    publishActiveMotion(votingMotion);
+    navigate("/session", { state: { seedProposer: votingMotion?.delegation ?? null } });
+  }
+
+  // Seeds the queue with the full roster via a one-time router-state flag
+  // rather than persisted state, so refreshing /session doesn't re-seed over
+  // whatever the chair has done since.
+  function startSpeakingTime(seconds) {
+    const entry = { motion: "Speakers' List", speakingTime: seconds / 60 };
+    ConferenceService.setActiveMotion(entry);
+    publishActiveMotion(entry);
+    navigate("/session", { state: { seedQueue: true } });
+  }
+
+  // Deleting the motion under vote closes the vote too.
+  function deleteMotion(index) {
+    if (motionLog[index]?.id === votingMotionId) setVotingMotionId(null);
+    undoRef.current = { entry: motionLog[index], index };
+    setMotionLog((prev) => prev.filter((_, i) => i !== index));
+  }
+
+  // Clamped to [0, delegateCount] - can't log more seconds than there are
+  // delegates in the committee. secondCount undefined (a freshly-submitted
+  // entry) reads as 0, same as the old boolean `seconded` read as falsy.
+  function adjustSecond(index, delta) {
+    setMotionLog((prev) =>
+      prev.map((entry, i) =>
+        i === index
+          ? { ...entry, secondCount: Math.max(0, Math.min(delegateCount, (entry.secondCount ?? 0) + delta)) }
+          : entry
+      )
+    );
+  }
+
+  function performUndo() {
+    const action = undoRef.current;
+    if (!action) return;
+    undoRef.current = null;
+    setMotionLog((prev) => {
+      const next = [...prev];
+      next.splice(Math.min(action.index, next.length), 0, action.entry);
+      return next;
+    });
+  }
+
+  useEffect(() => {
+    if (!committee) return;
+    // A failed write (private browsing, quota) just leaves this in memory only.
+    session.setJSON(motionVoteKey(committee.id), { motionText, groups, motionLog, absentCount, votingMotionId });
+  }, [committee, motionText, groups, motionLog, absentCount, votingMotionId]);
+
+  const adjustVotes = useCallback((index, delta) => {
+    setGroups((prev) => adjustVoteGroups(prev, index, delta));
+  }, []);
+
+  const allowAbstain = groups.length > 2;
+  // Abstain can disappear (toggle off, new vote) while it's selected.
+  const activeIndex = selectedIndex < groups.length ? selectedIndex : 0;
+
+  // Locked (a no-op) whenever anyone's absent - their seats are already
+  // forced into Abstain (see voteGroups.js's buildInitialGroups) and folding
+  // the group away would misrepresent them as real Against votes.
+  function toggleAbstain() {
+    if (absentCount > 0) return;
+    setGroups((prev) => toggleAbstainGroups(prev));
+  }
+
+  // A fixed contextual override that can't be remapped away: while
+  // votingMotion is set, 1/2/3/+/- reach these handlers before the motions
+  // scope sees them, reusing the existing select-then-adjust behavior.
+  useDaisShortcuts(
+    "motions",
+    {
+      "motions.newMotion": () => motionInputRef.current?.focus(),
+      "motions.second": () => selectedMotion && adjustSecond(clampedMotionIndex, 1),
+      "motions.openVote": () => selectedMotion && startVoting(selectedMotion),
+      "motions.confirm": () => selectedMotion && startVoting(selectedMotion),
+      "motions.moveUp": () => moveMotionSelection(-1),
+      "motions.moveDown": () => moveMotionSelection(1),
+      "global.undo": performUndo,
+      "global.legend": () => setLegendOpen((open) => !open),
+      "global.viewSpeakerList": () => navigate("/session"),
+      "global.viewRollCall": () => navigate("/rollcall"),
+      "global.viewGeneralVoting": () => navigate("/vote"),
+    },
+    {
+      votingActive: Boolean(votingMotion),
+      voteHandlers: {
+        "voting.selectFor": () => setSelectedIndex(0),
+        "voting.selectAgainst": () => setSelectedIndex(1),
+        "voting.selectAbstain": () => allowAbstain && setSelectedIndex(2),
+        "voting.increment": () => adjustVotes(activeIndex, 1),
+        "voting.decrement": () => adjustVotes(activeIndex, -1),
+      },
+    }
+  );
+
+  if (!committee) return <NoCommitteeModal />;
+
+  return (
+    <div className="app-shell min-h-screen bg-[var(--app-bg)] text-[var(--app-text)]">
+      <AppTopBar
+        committeeLabel={committee?.committee ?? committee?.id}
+        onShowShortcuts={() => setLegendOpen(true)}
+      />
+      <div className="mx-auto max-w-5xl p-8">
+
+        <div className={votingMotion ? "grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_400px]" : "flex justify-center"}>
+          <div className={`min-w-0 border border-[var(--app-border)] bg-[var(--app-panel)] p-6 ${votingMotion ? "" : "w-full max-w-2xl"}`}>
+            <p className="text-[11px] uppercase tracking-[0.26em] text-[var(--app-text-muted)]">
+              {inputMode === "natural" ? "Motion text" : "New motion"}
+            </p>
+
+            {inputMode === "natural" ? (
+              <MotionInput
+                ref={motionInputRef}
+                value={motionText}
+                onChange={setMotionText}
+                placeholder="You can type as naturally as you want"
+                rows={8}
+                className="mt-4"
+                delegations={delegations}
+                onSubmit={handleMotionSubmit}
+              />
+            ) : (
+              <MotionDropdownForm
+                ref={motionInputRef}
+                delegations={delegations}
+                onSubmit={handleMotionSubmit}
+                className="mt-4"
+              />
+            )}
+
+            <MotionLog
+              entries={motionLog}
+              onDelete={deleteMotion}
+              onVote={startVoting}
+              onAdjustSecond={adjustSecond}
+              maxSeconds={delegateCount}
+              selectedIndex={clampedMotionIndex}
+            />
+          </div>
+
+          {votingMotion && (
+            <VotingPanel
+              subtitle={formatMotionSummary(votingMotion)}
+              groups={groups}
+              selectedIndex={activeIndex}
+              onSelect={setSelectedIndex}
+              onIncrement={(index) => adjustVotes(index, 1)}
+              onDecrement={(index) => adjustVotes(index, -1)}
+              absentCount={absentCount}
+              onToggleAbstain={toggleAbstain}
+              onContinue={continueToSession}
+            />
+          )}
+        </div>
+
+        <SpeakingTimeSelector onSelect={startSpeakingTime} />
+
+        <p className="mt-8 text-center text-[11px] text-[var(--app-text-faint)]">
+          Source of motions are from the ThaiMUN RoP
+        </p>
+      </div>
+
+      <ShortcutLegend scopeName="motions" open={legendOpen} onClose={() => setLegendOpen(false)} />
+    </div>
+  );
+}

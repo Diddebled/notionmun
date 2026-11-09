@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Motion - From motion to resolution.</title>
+    <meta
+      name="description"
+      content="Motion is a Model United Nations committee management workspace for rosters, speakers, timers, votes, resolutions, and motions."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <a class="brand" href="#top" aria-label="Motion home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="brand-dot"></span>
+          <span class="brand-line line-one"></span>
+          <span class="brand-line line-two"></span>
+          <span class="brand-line line-three"></span>
+        </span>
+        <span>Motion</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#problem">Why Motion</a>
+        <a href="#app">Features</a>
+        <a href="#how">How it works</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="button primary small" href="#app">Open dais <span aria-hidden="true">-&gt;</span></a>
+        <button class="menu-button" id="menuButton" type="button" aria-label="Open site menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <div class="settings-popover" id="settingsPopover" hidden>
+        <button class="setting-row" id="themeToggle" type="button">
+          <span>
+            <strong id="themeLabel">Dark mode</strong>
+            <small>Switch the interface contrast.</small>
+          </span>
+          <span id="themeState">Off</span>
+        </button>
+        <button class="setting-row" id="motionToggle" type="button">
+          <span>
+            <strong>Reduced motion</strong>
+            <small>Control page sweeps and reveal fades.</small>
+          </span>
+          <span id="motionState">Off</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Motion / Committee OS</p>
+          <h1>From motion<br>to <span>resolution.</span></h1>
+          <p class="hero-text">
+            Modern committee management for Model United Nations. Built to keep chairs focused on the room, not the software.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#app">Run committee <span aria-hidden="true">-&gt;</span></a>
+            <a class="button secondary" href="#waitlist">Join waitlist</a>
+          </div>
+        </div>
+
+        <section class="live-console" aria-label="Live debate console">
+          <div class="console-topline">
+            <div class="brand invert">
+              <span class="brand-mark" aria-hidden="true">
+                <span class="brand-dot"></span>
+                <span class="brand-line line-one"></span>
+                <span class="brand-line line-two"></span>
+                <span class="brand-line line-three"></span>
+              </span>
+              <span>Motion</span>
+            </div>
+            <div>
+              <span id="committeeLabel">DISEC</span>
+              <strong>Session live</strong>
+            </div>
+          </div>
+
+          <div class="active-speaker">
+            <p>Active speech</p>
+            <h2 id="activeCountry">United Kingdom</h2>
+            <span id="activeMode">Moderated caucus</span>
+          </div>
+
+          <div class="timer-ring" id="timerRing">
+            <strong id="timerDisplay">01:30</strong>
+            <span id="timerCaption">remaining</span>
+          </div>
+
+          <div class="timer-controls" aria-label="Timer controls">
+            <button class="console-button muted" id="minusTime" type="button">- 15s total</button>
+            <button class="console-button" id="startPause" type="button">Start</button>
+            <button class="console-button muted" id="plusTime" type="button">+ 15s total</button>
+            <button class="console-button muted" id="resetTimer" type="button">Reset</button>
+          </div>
+
+          <div class="console-stats">
+            <span><strong id="estimatedTime">10 min</strong>Estimated</span>
+            <span><strong id="spokenCount">00</strong>Spoken</span>
+            <span><strong id="queuedCount">04</strong>Queued</span>
+          </div>
+
+          <div class="queue-preview">
+            <div class="preview-heading">
+              <span>Up next</span>
+              <button id="nextSpeaker" type="button">Next speaker</button>
+            </div>
+            <ol id="heroQueue"></ol>
+          </div>
+        </section>
+      </section>
+
+      <section class="problem-band" id="problem">
+        <div>
+          <p class="eyebrow">The problem</p>
+          <h2>Run the committee. Not spreadsheets.</h2>
+        </div>
+        <p>
+          A chair's attention belongs in the room, not scattered across tabs, files, and formulas.
+          Motion brings speakers, timers, votes, motions, rosters, and resolutions into one dais workspace.
+        </p>
+      </section>
+
+      <section class="workspace" id="app">
+        <div class="section-heading">
+          <p class="eyebrow">Core features</p>
+          <h2>Everything on the dais. Nothing in the way.</h2>
+          <p>Six focused tools replace the patchwork without changing the procedure chairs and delegates already know.</p>
+        </div>
+
+        <div class="status-strip">
+          <label>
+            Committee
+            <input id="committeeInput" type="text" value="DISEC">
+          </label>
+          <label>
+            Current topic
+            <input id="topicInput" type="text" value="Discussing possible solutions to regional security">
+          </label>
+          <label>
+            Debate mode
+            <select id="modeInput">
+              <option>Moderated caucus</option>
+              <option>General speakers list</option>
+              <option>Unmoderated caucus</option>
+              <option>Committee of the Whole</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="tool-grid">
+          <section class="tool-panel roster-panel" id="roster">
+            <div class="panel-heading">
+              <span>01</span>
+              <div>
+                <h3>Excel delegate import</h3>
+                <p>Bring your roster in once. Countries, names, and voting status arrive ready for committee.</p>
+              </div>
+            </div>
+            <div class="import-row">
+              <label class="button secondary file-button">
+                Import .xlsx / .csv
+                <input id="rosterFile" type="file" accept=".xlsx,.csv,.tsv,text/csv">
+              </label>
+              <button class="button ghost" id="loadSample" type="button">Load sample</button>
+              <span id="importStatus" role="status"></span>
+            </div>
+            <form class="compact-form" id="delegateForm">
+              <input id="countryInput" type="text" placeholder="Country" required>
+              <input id="delegateInput" type="text" placeholder="Delegate name">
+              <select id="statusInput">
+                <option>Voting</option>
+                <option>Observer</option>
+              </select>
+              <button class="button primary" type="submit">Add delegate</button>
+            </form>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Country</th>
+                    <th>Delegate</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="delegateTable"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="tool-panel" id="debate">
+            <div class="panel-heading">
+              <span>02</span>
+              <div>
+                <h3>Speaker queue management</h3>
+                <p>Keep the general speakers list and moderated caucuses moving without losing the room.</p>
+              </div>
+            </div>
+            <form class="compact-form" id="queueForm">
+              <select id="queueDelegate"></select>
+              <select id="queueType">
+                <option>GSL</option>
+                <option>Moderated</option>
+                <option>Yield</option>
+              </select>
+              <button class="button primary" type="submit">Add speaker</button>
+            </form>
+            <ol class="queue-list" id="queueList"></ol>
+          </section>
+
+          <section class="tool-panel" id="timers">
+            <div class="panel-heading">
+              <span>03</span>
+              <div>
+                <h3>Built-in debate timers</h3>
+                <p>One precise, visible clock for speeches, caucuses, and yields, controlled from the dais.</p>
+              </div>
+            </div>
+            <div class="timer-settings">
+              <label>
+                Caucus minutes
+                <input id="totalMinutes" type="number" min="1" max="120" value="10">
+              </label>
+              <label>
+                Seconds per speaker
+                <input id="speakerSeconds" type="number" min="15" max="600" step="15" value="90">
+              </label>
+              <button class="button primary" id="applyTimer" type="button">Apply timer</button>
+            </div>
+            <div class="motion-note" id="currentTopicText"></div>
+          </section>
+
+          <section class="tool-panel" id="vote">
+            <div class="panel-heading">
+              <span>04</span>
+              <div>
+                <h3>Voting & majority calculations</h3>
+                <p>Track the room and calculate simple, two-thirds, and substantive majorities instantly.</p>
+              </div>
+            </div>
+            <div class="vote-grid">
+              <label>
+                For
+                <input id="forVotes" type="number" min="0" value="14">
+              </label>
+              <label>
+                Abstain
+                <input id="abstainVotes" type="number" min="0" value="3">
+              </label>
+              <label>
+                Against
+                <input id="againstVotes" type="number" min="0" value="2">
+              </label>
+              <label>
+                Majority
+                <select id="majorityMode">
+                  <option value="simple">Simple</option>
+                  <option value="twoThirds">Two-thirds</option>
+                  <option value="substantive">Substantive</option>
+                </select>
+              </label>
+            </div>
+            <div class="vote-result" id="voteResult"></div>
+          </section>
+
+          <section class="tool-panel" id="resolutions">
+            <div class="panel-heading">
+              <span>05</span>
+              <div>
+                <h3>Resolution display</h3>
+                <p>Present working papers, amendments, and draft resolutions without hunting through PDFs.</p>
+              </div>
+            </div>
+            <form class="resolution-form" id="resolutionForm">
+              <input id="resolutionTitle" type="text" placeholder="Draft resolution 1.1" required>
+              <input id="resolutionSponsors" type="text" placeholder="Sponsors">
+              <select id="resolutionStatus">
+                <option>Draft</option>
+                <option>Working paper</option>
+                <option>Adopted</option>
+              </select>
+              <textarea id="resolutionBody" rows="6" placeholder="Operative clauses"></textarea>
+              <button class="button primary" type="submit">Save resolution</button>
+            </form>
+            <div class="resolution-layout">
+              <div class="resolution-list" id="resolutionList"></div>
+              <article class="room-display" id="roomDisplay"></article>
+            </div>
+          </section>
+
+          <section class="tool-panel" id="motions">
+            <div class="panel-heading">
+              <span>06</span>
+              <div>
+                <h3>Motion presets</h3>
+                <p>Start with procedures tailored to your committee, then adjust the details that matter.</p>
+              </div>
+            </div>
+            <div class="preset-grid" id="presetGrid">
+              <button type="button" data-preset="unmoderated">Unmoderated</button>
+              <button type="button" data-preset="moderated">Moderated</button>
+              <button type="button" data-preset="cotw">COTW</button>
+              <button type="button" data-preset="gsl">GSL</button>
+            </div>
+            <div class="motion-log" id="motionLog"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="how-band" id="how">
+        <p class="eyebrow">How it works</p>
+        <h2>A clear line from roll call to resolution.</h2>
+        <div class="steps">
+          <article><span>01</span><h3>Import committee</h3><p>Upload the delegate roster and review voting status.</p></article>
+          <article><span>02</span><h3>Run debate</h3><p>Control speakers, motions, and time from one view.</p></article>
+          <article><span>03</span><h3>Manage votes</h3><p>Record decisions with the correct majority, instantly.</p></article>
+          <article><span>04</span><h3>Present resolutions</h3><p>Move adopted work to the room-facing display.</p></article>
+        </div>
+      </section>
+
+      <section class="vision-band">
+        <div class="brand invert">
+          <span class="brand-mark" aria-hidden="true">
+            <span class="brand-dot"></span>
+            <span class="brand-line line-one"></span>
+            <span class="brand-line line-two"></span>
+            <span class="brand-line line-three"></span>
+          </span>
+          <span>Motion / 2026</span>
+        </div>
+        <blockquote>
+          Built by delegates.<br>
+          Designed for chairs.
+        </blockquote>
+        <p>
+          Motion removes the operational friction around debate while preserving what makes Model United Nations matter:
+          procedure, diplomacy, and the people in the room.
+        </p>
+      </section>
+
+      <section class="waitlist" id="waitlist">
+        <p class="eyebrow">Early access</p>
+        <h2>Bring the room back into focus.</h2>
+        <p>Join chairs and conference organizers building a cleaner, smoother, more focused MUN experience.</p>
+        <form id="waitlistForm" class="waitlist-form">
+          <label>
+            Email address
+            <input id="emailInput" type="email" placeholder="you@conference.org" required>
+          </label>
+          <button class="button primary" type="submit">Join the waitlist</button>
+        </form>
+        <p class="subtle" id="waitlistMessage">No noise. Just product updates and early access.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="brand invert">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="brand-dot"></span>
+          <span class="brand-line line-one"></span>
+          <span class="brand-line line-two"></span>
+          <span class="brand-line line-three"></span>
+        </span>
+        <span>Motion</span>
+      </div>
+      <p>From motion to resolution.</p>
+      <nav aria-label="Footer">
+        <a href="#app">Features</a>
+        <a href="#how">Process</a>
+        <a href="#waitlist">Waitlist</a>
+      </nav>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

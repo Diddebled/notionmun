@@ -1,0 +1,1784 @@
+{
+  "revision": "6e57695337a46831d3772ab4945d7a7f8e25d5c1",
+  "verifiedOn": "2026-10-30",
+  "assets": [
+    {
+      "code": "ABW",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ABW.svg",
+      "sha256": "3470f9d307b95c0d30e1a884361220e6b95f0434b0e09bdd372e21bff46e7f24"
+    },
+    {
+      "code": "AFG",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/AFG.svg",
+      "sha256": "1c91df31edfad65ef48efe1217982446fe15a87223daccb31f175de14fc3a860"
+    },
+    {
+      "code": "AGO",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/AGO.svg",
+      "sha256": "d2ed9a9127deb8ced03e6c43996cebc3946ed70a77448f6ff2c6b4d39d0f0e20"
+    },
+    {
+      "code": "AHE",
+      "kind": "historical-illustration",
+      "license": "CPAL-1.0",
+      "sourceUrl": "https://github.com/Paul2556/Motion",
+      "sha256": "2f09abb1f663829d7c484e990b106bfbb5d9be6bef69aeafdfa5457a7af71c69"
+    },
+    {
+      "code": "AIA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/AIA.svg",
+      "sha256": "5ae8b87bbad75985f951fa4a2c8d9141d7f7810397737c6b18dabdee82ea6744"
+    },
+    {
+      "code": "ALA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ALA.svg",
+      "sha256": "8c644b915ea4d8fd23fb0c3e939f094b8dc7fafc6bace744cf3f4cf5018be967"
+    },
+    {
+      "code": "ALB",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ALB.svg",
+      "sha256": "203360be9fae3fe241358f865a14592b4259cf29b6a83cbeab08cdea8c6ce02e"
+    },
+    {
+      "code": "AND",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/AND.svg",
+      "sha256": "46de3ac68ad5e0356b03141d5fe8ce7c31bfbfa09c564529cb941341ec39d1c3"
+    },
+    {
+      "code": "ARE",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ARE.svg",
+      "sha256": "b6737451db2ead231c2cebab15e63b2c3a23dc262dcf9eb358d29d009e8d5f23"
+    },
+    {
+      "code": "ARG",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ARG.svg",
+      "sha256": "28ecf526f19df606ace9d3ca3fe508329a43a40cc1ab5be31a4a4f36cf9de352"
+    },
+    {
+      "code": "ARM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ARM.svg",
+      "sha256": "0a7f0b039fdd794131ba6ed6e5e8ccd4e053b5ef9a2884fe2839d8fae49cd237"
+    },
+    {
+      "code": "ASM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ASM.svg",
+      "sha256": "714b6d092f30f53241d0d033b3f086c38a6b1f6be47e362fc18695585222e9d7"
+    },
+    {
+      "code": "ATA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ATA.svg",
+      "sha256": "34178aa0eed33ed7ecc1e225b3b09e0932aa9af7e839253a6110d9fd2f4b2f22"
+    },
+    {
+      "code": "ATF",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ATF.svg",
+      "sha256": "9b1f052f6c7e5009ee72e005dd73cb8fa26c880befa46f993bc4d1c9f6004b4c"
+    },
+    {
+      "code": "ATG",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ATG.svg",
+      "sha256": "0a9ab6c74af957cc04f9f702aec1a37156dafa220a3394797f3bfc47d5e48d87"
+    },
+    {
+      "code": "AUS",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/AUS.svg",
+      "sha256": "7cf5a159138a3010dfa64f891956d517fa93d645e71493cd0c9b965e853d188f"
+    },
+    {
+      "code": "AUT",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/AUT.svg",
+      "sha256": "24145583f19e51b13f01d3f080499565f46deac105e38a808f5f450552dde419"
+    },
+    {
+      "code": "AZE",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/AZE.svg",
+      "sha256": "e98cb88336e4681fca93e6437e56664185ec4b0ae296d68a2e9d2b630359af74"
+    },
+    {
+      "code": "BDI",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BDI.svg",
+      "sha256": "55b47815f79e537f59923b8ada50934f255cd30b0401a6bd85a328f10fa0380d"
+    },
+    {
+      "code": "BEL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BEL.svg",
+      "sha256": "b48c411d2a4309b67994d4b903ec4e0e752659996b20ad0e18e801e1555b5f97"
+    },
+    {
+      "code": "BEN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BEN.svg",
+      "sha256": "cae15fe7d37b20d3dd8a58ef9b17d5b525adb80381c0654c69da70485f99425c"
+    },
+    {
+      "code": "BFA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BFA.svg",
+      "sha256": "a1e484869b9a91126c2d3c25a9824c65cf494454b4abf49f4eea0ee9da313df9"
+    },
+    {
+      "code": "BGD",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BGD.svg",
+      "sha256": "7862e7a536ff479c6532f505130aadbf59ca561e5fcf27a3b2f9f8d804488374"
+    },
+    {
+      "code": "BGR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BGR.svg",
+      "sha256": "1e654b08057abf0f1881367e54269f9875b4cf0c1f162a953d9ef21b34acef41"
+    },
+    {
+      "code": "BHR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BHR.svg",
+      "sha256": "73a52b06434ff127cb792a565daa873a0ff13e0acd66091ca4016ce1b4b407ed"
+    },
+    {
+      "code": "BHS",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BHS.svg",
+      "sha256": "23f292e9a46d3cde28e37131808857c8a849a39b0c128e53f2a094df485b68d1"
+    },
+    {
+      "code": "BIH",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BIH.svg",
+      "sha256": "32d4c32c874c7740243baf82bf1c86ba8b3422d6bba2c86e6b3555dad228636c"
+    },
+    {
+      "code": "BLM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BLM.svg",
+      "sha256": "aa9f5213b793e08170ad65ac09394e8f130adf5ef4dc4ac4d48ee11f297d6ab0"
+    },
+    {
+      "code": "BLR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BLR.svg",
+      "sha256": "e9367d759b2aa2b28f85e98b8ae578ff61a3bf85abb358744842b24d8b3e6257"
+    },
+    {
+      "code": "BLZ",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BLZ.svg",
+      "sha256": "c8b12577922928a5f01b1e7aaf02002fcf54d6b687c48e51cd305ac853f8f547"
+    },
+    {
+      "code": "BMU",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BMU.svg",
+      "sha256": "3240042a899f97e03b18386baf6d86815cd8a94236c77b4a0ad7ae556ab33417"
+    },
+    {
+      "code": "BOL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BOL.svg",
+      "sha256": "b0069c4a579dc072fa89ba15f5b06ed05ea40f11759491f839179cb61ec691bf"
+    },
+    {
+      "code": "BRA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BRA.svg",
+      "sha256": "f1243da0f40fb71069cc8791ef5a51c169cf2408a5fc0d4fb2386f2411a4ea0e"
+    },
+    {
+      "code": "BRB",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BRB.svg",
+      "sha256": "b298bc51c83d9556715a8bbf70846fc499df1274c28d34f2c06c38bfd6a2075b"
+    },
+    {
+      "code": "BRN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BRN.svg",
+      "sha256": "83201b9d21be22ad7bc73e7e0edb2dd0190f609969dee1594cb7659736f67021"
+    },
+    {
+      "code": "BTN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BTN.svg",
+      "sha256": "1f907ba49bfc9078dc9817ec16a62cacbf3139995eec558fe09c9c44728f68e7"
+    },
+    {
+      "code": "BVT",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BVT.svg",
+      "sha256": "ae9a6e8838762b1169f96a156eee5fbd0efa43ad6ae586200f43e5ef19fccea4"
+    },
+    {
+      "code": "BWA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/BWA.svg",
+      "sha256": "1801f5817c93538bd86759ee7481ecd66f31756d8e86ea1b1d6a3a9ccd281f29"
+    },
+    {
+      "code": "BYZ",
+      "kind": "historical-illustration",
+      "license": "CPAL-1.0",
+      "sourceUrl": "https://github.com/Paul2556/Motion",
+      "sha256": "4d8d67b0fd8faa75b8be164f6ff56f21eb65451f718ba5db58c6333c65fce3c4"
+    },
+    {
+      "code": "CAF",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CAF.svg",
+      "sha256": "648f32c6a443baa5525518a23c1d8fcf730b19f468852d358bb554571d367735"
+    },
+    {
+      "code": "CAN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CAN.svg",
+      "sha256": "2649182453c66bd7d9998a008e8c88c4f2e809c5898377c2168092c8ecdb5341"
+    },
+    {
+      "code": "CCK",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CCK.svg",
+      "sha256": "0ec6ed74b1ce128b3c93ad74ad55850cd91ab2073e57896aa2fbbd00b54f998c"
+    },
+    {
+      "code": "CHE",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CHE.svg",
+      "sha256": "e2b8f42ef7594e5457dc14bb4d62356f420fa24091f3710930c2d70bc8a631d7"
+    },
+    {
+      "code": "CHL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CHL.svg",
+      "sha256": "d776f0aa8673c1b42571a240057fa787150a7100c884acd5bfd59882412921f2"
+    },
+    {
+      "code": "CHN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CHN.svg",
+      "sha256": "d2001600babd8f6277b469ac6288a07d32f95a23f18663d9eb08f96a3b3fd87d"
+    },
+    {
+      "code": "CIV",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CIV.svg",
+      "sha256": "ecba123a31d5c1b6fd5535c3b2f00da1b615b69db2f026040c174ecfb09141a5"
+    },
+    {
+      "code": "CMR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CMR.svg",
+      "sha256": "59b579946414dc86f8960a35be6aecb1d0f03f6f78661352f3f517634db3a0af"
+    },
+    {
+      "code": "COD",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/COD.svg",
+      "sha256": "13becde9f96110045bcf8807403cba019b9fad02430dcc97fe9a9ec3198d8e1e"
+    },
+    {
+      "code": "COG",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/COG.svg",
+      "sha256": "4cf40b6b4db96667466364b7638b29290cb59ea5e6155dc858f0a5e6abcd315c"
+    },
+    {
+      "code": "COK",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/COK.svg",
+      "sha256": "423f3671d508f864072f1f2402e8375b4cb48d37d9c2d6fd5d096e300893c703"
+    },
+    {
+      "code": "COL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/COL.svg",
+      "sha256": "7b74971340a69336d35d4a6acf5abe83d82a4ba794d12dd6725ae71c98f8fa82"
+    },
+    {
+      "code": "COM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/COM.svg",
+      "sha256": "00c10d9fda02be8898d2e4cb417a2c8c7830dff859ded77338e59918bde8e73d"
+    },
+    {
+      "code": "CPV",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CPV.svg",
+      "sha256": "36ab8ffea45eebec2c27163fa75e3707e18a6184461ae6f6842d17211598cb0c"
+    },
+    {
+      "code": "CRI",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CRI.svg",
+      "sha256": "ef49a8761a1881bc0600903075844bed8735006ce20e6cfc12c0878cacc069f7"
+    },
+    {
+      "code": "CUB",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CUB.svg",
+      "sha256": "bf38b6318f20f3090783259fcb09a16b3710d946d2390b0c9cde9cbfdacbe4c5"
+    },
+    {
+      "code": "CUW",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CUW.svg",
+      "sha256": "229f0ab2c90c46f5cb5dce9c08c5923851cd97474c7fe85269ad434d04132c52"
+    },
+    {
+      "code": "CXR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CXR.svg",
+      "sha256": "996ea14bcb30843fa739bda8b22cf4f8676128d8e2c451b27f8f8c07230c765a"
+    },
+    {
+      "code": "CYM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CYM.svg",
+      "sha256": "29499153e7982b316c9a7fcb0ca1859998f8560aacb4b4e1a90746cfc73aa06c"
+    },
+    {
+      "code": "CYP",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CYP.svg",
+      "sha256": "b43b11253381fee3b570500093c7c838a57d811ca68c1cfec79af752d83df54e"
+    },
+    {
+      "code": "CZE",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/CZE.svg",
+      "sha256": "57696dbb35d351a7303d51d13b38f62cd4c161943e7fb7fc88186bcb7303b5b4"
+    },
+    {
+      "code": "DEU",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/DEU.svg",
+      "sha256": "523eb00ea616e6ce8c6a24088d8f90a224f67fffc2907dabac4087c05054a0db"
+    },
+    {
+      "code": "DJI",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/DJI.svg",
+      "sha256": "3e3ca5ac979426ffe9ccd4f147bcd3adf8a201e5d5ce67b92ad87e24eb4fc5c2"
+    },
+    {
+      "code": "DMA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/DMA.svg",
+      "sha256": "e55cf668da3c208b16639ea4d79eb31f116164116d582e558c2332fb52d3fc51"
+    },
+    {
+      "code": "DNK",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/DNK.svg",
+      "sha256": "3c9efc0706d3413842f2e8969138bef9f866a03a6eecacef4e051b340296dfac"
+    },
+    {
+      "code": "DOM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/DOM.svg",
+      "sha256": "ca2f7dadc7784b7e1428f04c0e685b860b393e94a1f97c3864a5c4e121c6661a"
+    },
+    {
+      "code": "DZA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/DZA.svg",
+      "sha256": "6e351380906adf1cd4d757206a10c7f87e771001a59911a1a6a8eab017c07d1a"
+    },
+    {
+      "code": "ECU",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ECU.svg",
+      "sha256": "465d1eb32389379fa9045fc2cdbc7b241a14d3bae91e0eff505218bbf3bae0c8"
+    },
+    {
+      "code": "EGY",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/EGY.svg",
+      "sha256": "4f3117026b2a07e67e65479649300a1b490fd0802b4cf50aec4c64c25e6ec767"
+    },
+    {
+      "code": "ERI",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ERI.svg",
+      "sha256": "db62abb672056d5d2f5b6374404e4a4f8d30f5afd13b9abac09e8d6249f520d3"
+    },
+    {
+      "code": "ESH",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ESH.svg",
+      "sha256": "e55808c1f1e61f8e2712cc061838bbd982e0e1a34e2ef651c6c10125fd09b547"
+    },
+    {
+      "code": "ESP",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ESP.svg",
+      "sha256": "f60c641f39c420003f4c3b13b189cee3a3e4914b8420d54d8b5c6c9504860521"
+    },
+    {
+      "code": "EST",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/EST.svg",
+      "sha256": "01aedab089e8b296addb054378381a9efd88966f35d8b98896af67c4a0ff7301"
+    },
+    {
+      "code": "ETH",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ETH.svg",
+      "sha256": "567e091e972bae65b80e3851730beb4eb40b65cb8fe41402d80c8dd3c78d4450"
+    },
+    {
+      "code": "FIN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/FIN.svg",
+      "sha256": "2ed0767db44ea72dbe47198ffa35b4ff53c5d13f81a276805b378c118574a973"
+    },
+    {
+      "code": "FJI",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/FJI.svg",
+      "sha256": "ce89cb319f82a480dd4e009ed98dd79fa5cfddca5b5eb66bc2ff11e4549ab124"
+    },
+    {
+      "code": "FLK",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/FLK.svg",
+      "sha256": "9ff8c880aa18fb0e20c9a58663ea93ad02086ca4bbb9f0f8d0c995382dd2f097"
+    },
+    {
+      "code": "FRA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/FRA.svg",
+      "sha256": "cf72ef7082a3960b755303ca35c6b3d7fdc2eb4baf3659f67fb37b348108b32d"
+    },
+    {
+      "code": "FRO",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/FRO.svg",
+      "sha256": "74f43a3f68f5c1f590b1fe5298222d9c95eb0dfb57b37f6c9b7c358166567b4b"
+    },
+    {
+      "code": "FSM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/FSM.svg",
+      "sha256": "83b445ac20c1e124358a2ed386e946412a19f41376b82f6f739c61bf3ffcf030"
+    },
+    {
+      "code": "GAB",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GAB.svg",
+      "sha256": "681cd5f58f90c861b2ea90148bbd6951cb2919c57a81b450663db3683c931cd0"
+    },
+    {
+      "code": "GB-SCT",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GB-SCT.svg",
+      "sha256": "aa69f8eed793800ddacee5fd4b4f147872f6921a79edc88eb431a72059dfdb89"
+    },
+    {
+      "code": "GBR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GBR.svg",
+      "sha256": "77f51040aed05f13e69eff3555f5fb232d55b5304e24fbfaed6f757fa110a241"
+    },
+    {
+      "code": "GEO",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GEO.svg",
+      "sha256": "cb3f95ec5928b49ebc0e04a3525f7262fe02b72b8a65bc303504a458d23e03aa"
+    },
+    {
+      "code": "GGY",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GGY.svg",
+      "sha256": "0a8982ffeb71bf7ded7883c19958ff96943e0eaeee51b8ba92a2873a3d18d096"
+    },
+    {
+      "code": "GHA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GHA.svg",
+      "sha256": "a02b47a1a44cf11fe3940c2134b6a43e3b1c3218b7fb520fbca42e36fdb54ef0"
+    },
+    {
+      "code": "GIB",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GIB.svg",
+      "sha256": "cac0d94a592ddb4652fb5f6ccabcdb4cdd0fc6eae115388341e4215af04c6a8d"
+    },
+    {
+      "code": "GIN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GIN.svg",
+      "sha256": "0e4bbe9005343017de30243b6f48ae6203c5400a5b0436434a55fc99e4341236"
+    },
+    {
+      "code": "GLP",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GLP.svg",
+      "sha256": "75ec327c15f2a56eae8158504e6ad0ce85a752408e98faddcece69076f31f376"
+    },
+    {
+      "code": "GMB",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GMB.svg",
+      "sha256": "d544c5ed31e4cc372dcc0456561b7db65c1e45e2acbeca64a9ad2f32d86b1dba"
+    },
+    {
+      "code": "GNB",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GNB.svg",
+      "sha256": "e5b18f57f80ffb9440e2a93a5a10f7da40b2a9514d061c37cba0464cef615b4d"
+    },
+    {
+      "code": "GNQ",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GNQ.svg",
+      "sha256": "2c5e20feeed1bf9503ca24653e792c70c215e1dca737be12218e55a1b3c019e9"
+    },
+    {
+      "code": "GRC",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GRC.svg",
+      "sha256": "8c399def93333327b394bc8a7b71ddb8fd102eb7899444e6fdc6a84fbaa370c5"
+    },
+    {
+      "code": "GRD",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GRD.svg",
+      "sha256": "800b2bdc1738da90494b79ff0592fa7e9d1f0a40dce7fe75bd7a56c911756bf6"
+    },
+    {
+      "code": "GRL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GRL.svg",
+      "sha256": "522e8c5a7f671f8dd2f5eb2b31f73847d7a01b07f7528b67f92ff99eb4713151"
+    },
+    {
+      "code": "GTM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GTM.svg",
+      "sha256": "99687db868a17cf7f9d3043414f9418756cb0acbefa0b75374d0c32e710872ce"
+    },
+    {
+      "code": "GUF",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GUF.svg",
+      "sha256": "30380cb46c3a6cd999a4e4480b0775b61f6f1b57a40f7b2fbd38be9282d75132"
+    },
+    {
+      "code": "GUM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GUM.svg",
+      "sha256": "d61b9694e0383fb2c6c121f27e7fdae910a3399c42a2477cc5b94a6a688c8c6f"
+    },
+    {
+      "code": "GUY",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/GUY.svg",
+      "sha256": "6e97234dddaa4f00680884502879134f693e9b9cdc94d472c2b7974803642eca"
+    },
+    {
+      "code": "HKG",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/HKG.svg",
+      "sha256": "5ed4bcd02cf74e849ebe35cdc1734a4e8bea055887fe0aecc0f4dde52252d2a2"
+    },
+    {
+      "code": "HMD",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/HMD.svg",
+      "sha256": "faab8a9d3c8fa07d9df06f0354cbba34427579b556abc45c7151dae6a3a61866"
+    },
+    {
+      "code": "HND",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/HND.svg",
+      "sha256": "d40635ce765358f88cf06f492c05556ac383bebc6f2892234879e7c401fa63b2"
+    },
+    {
+      "code": "HRV",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/HRV.svg",
+      "sha256": "cc7cb793c26d80bd5a384a28a4901121a1fed0b87e8181a229267a5401bbaa33"
+    },
+    {
+      "code": "HTI",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/HTI.svg",
+      "sha256": "9037ede3c9af9ec4a94c9575e12cc1da38a4b617ebc4fafaf594192829fb795e"
+    },
+    {
+      "code": "HUN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/HUN.svg",
+      "sha256": "a5503ea72c662290bf80e161cef660e44062379d627e8c511a01f6f79dfbd261"
+    },
+    {
+      "code": "IDN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/IDN.svg",
+      "sha256": "9845a3f3a33158e39c7cb0290467d160f61bdfeda25d03f57d8d1556b0c9ac96"
+    },
+    {
+      "code": "IMN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/IMN.svg",
+      "sha256": "f52e082ad582cb9c95c8a01d9f63cba02f93601216d15dd7733750f7fcb01162"
+    },
+    {
+      "code": "IND",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/IND.svg",
+      "sha256": "be04658c4bbb5d55c97b2c7b3aa11da27b7e5f527ddf9be9a3d6c81a2b07ede3"
+    },
+    {
+      "code": "IOT",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/IOT.svg",
+      "sha256": "bb31a3b859e2f90aa29276841c6f1e82bf2b30f905aabe21486236368e9ba995"
+    },
+    {
+      "code": "IRL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/IRL.svg",
+      "sha256": "022e48186ef58405ce7137098d7d5d5b2c3d4680958e071a1d2506dae1f780f8"
+    },
+    {
+      "code": "IRN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/IRN.svg",
+      "sha256": "a6909dc27d2a4b665ac0be9f6ebbc2827022de9ebd6cb1eaadc860ecc31dbcbd"
+    },
+    {
+      "code": "IRQ",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/IRQ.svg",
+      "sha256": "9038ba4ed6c34162cad4a06980910cf34d6ca2fedd4e3e8422c07cac84583d1f"
+    },
+    {
+      "code": "ISL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ISL.svg",
+      "sha256": "e81be3332af52752d9991ea6b16ee3a52ee6fe9fbd7e17c8f5298fa4c7ae32a0"
+    },
+    {
+      "code": "ISR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ISR.svg",
+      "sha256": "174ca4f4d32ae7ccf3c7331ea40f8b685fb9aaaf6e30ef22b882604338968bdc"
+    },
+    {
+      "code": "ITA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ITA.svg",
+      "sha256": "cdb6ecffd7b73b3103cecb6b955b6fd0d9427411171d78a72ee5af4b5411abc3"
+    },
+    {
+      "code": "JAM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/JAM.svg",
+      "sha256": "401565d5c355099190bde28784ee51d0eb31082f314e671a915f02a322b4b52d"
+    },
+    {
+      "code": "JEY",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/JEY.svg",
+      "sha256": "f8449a4388fe67c0f7e53c63cfd38844b637f24b78bd978b718a869ef476a211"
+    },
+    {
+      "code": "JOR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/JOR.svg",
+      "sha256": "fc94f81d463b2ecaf45d630507fe1656047f333d6f8e2d40ac7510cf1fc96fd4"
+    },
+    {
+      "code": "JPN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/JPN.svg",
+      "sha256": "203d0d54ee98e0073a3cb32e752bdc253e82a59bbecbe008aab0974b16eb7124"
+    },
+    {
+      "code": "KAZ",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/KAZ.svg",
+      "sha256": "79c9d23f06b768067f419ad447083ca2aca6ba7def56650247b364a944c92864"
+    },
+    {
+      "code": "KEN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/KEN.svg",
+      "sha256": "838873b0ba45ad95a638197f6842698a873bea21dcade91a7dcf2528f0eb684b"
+    },
+    {
+      "code": "KGZ",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/KGZ.svg",
+      "sha256": "a22688b00f130a5678819346246c7c78ba5d14f15967275229751793a2d00990"
+    },
+    {
+      "code": "KHM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/KHM.svg",
+      "sha256": "c9dbf709cb0b2cdf298613ef0424e7462942ad4ec13e7d9af579524824d288af"
+    },
+    {
+      "code": "KIR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/KIR.svg",
+      "sha256": "370ee9fd8e28095a2ee3b81e09373272837f526628aed01c6f47031e9f8a4b84"
+    },
+    {
+      "code": "KNA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/KNA.svg",
+      "sha256": "f00c7d94748df0f7545ad33557c2198130637b66646a44ce7619ed3324d17323"
+    },
+    {
+      "code": "KOR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/KOR.svg",
+      "sha256": "3e71e51cd0c5e7ecc006b68be67204a22b7d5561537de9c3418da8084e40e149"
+    },
+    {
+      "code": "KWT",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/KWT.svg",
+      "sha256": "179e8de7f70cbf6d05f5e01271b8c13574785c80230c2d4c34f6e46c6a8e11d1"
+    },
+    {
+      "code": "LAO",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/LAO.svg",
+      "sha256": "75c64ae3cd1af0e5eff4fde8394ac1badf701320b16d33d283aed56d6a112376"
+    },
+    {
+      "code": "LBN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/LBN.svg",
+      "sha256": "d7669850a65111ff2f793fbaa356bdf001a689e2906077c233119db9aa3352e1"
+    },
+    {
+      "code": "LBR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/LBR.svg",
+      "sha256": "4752a670df0bf9128314644e5fc3f48dea9c1d09a3de058c3735872b0ffe168c"
+    },
+    {
+      "code": "LBY",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/LBY.svg",
+      "sha256": "7ef17ae59514b1b3c2bf39237db352527fb44be3b457e563e8b9db752a15a1ca"
+    },
+    {
+      "code": "LCA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/LCA.svg",
+      "sha256": "fe0e6e8f87a6f329f38e458eba5e01981e1586409eaddc6ec5ec09e1dbaa8f92"
+    },
+    {
+      "code": "LIE",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/LIE.svg",
+      "sha256": "77c14348779e761168112aea6f3538656c0026b279d28a62db23a41dc2ffe3b1"
+    },
+    {
+      "code": "LKA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/LKA.svg",
+      "sha256": "aa6ee83f290018a44f3de89e71f7edec8432b1017c9ca9ea9354015c0c9342b2"
+    },
+    {
+      "code": "LSO",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/LSO.svg",
+      "sha256": "82f9c0b0bc3e5f5d1d71dab155aa7b4e7e79722057eca200ccaffb018154ec88"
+    },
+    {
+      "code": "LTU",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/LTU.svg",
+      "sha256": "54e49cf18b7feb052267524b54f27d49b71562749572b6d2cdc25bd87ae5ccaf"
+    },
+    {
+      "code": "LUX",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/LUX.svg",
+      "sha256": "846ad56cfda73d13e7c97d634ba78a8175b1b48cf35649e70f550e503d407405"
+    },
+    {
+      "code": "LVA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/LVA.svg",
+      "sha256": "d0353aeec348cf6ebb2a9f0d36875e645035fc88a32041ae2802e42fb33e6aff"
+    },
+    {
+      "code": "MAC",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MAC.svg",
+      "sha256": "cb96938bbaf5f91b6ab850acb4c45888ea7f600aa491e1efb37fbb000d168250"
+    },
+    {
+      "code": "MAF",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MAF.svg",
+      "sha256": "702649550aa0af189453716f17062f82b60d25ceaa59c130089d92d4c4eb5247"
+    },
+    {
+      "code": "MAR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MAR.svg",
+      "sha256": "b360521ebafb5f5e9c59fe53995d981cb161213469872ffda5316c3a804cdb28"
+    },
+    {
+      "code": "MCO",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MC.svg",
+      "sha256": "ad1315e90d34d1c02dba5cb6190009761341a8a5f16c3dee987e3ade1b1e1caf"
+    },
+    {
+      "code": "MDA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MDA.svg",
+      "sha256": "179d216b76547ce34abbdcbeebb4c2a8255e145cc3e1fa8e7dbd88ce343fb494"
+    },
+    {
+      "code": "MDG",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MDG.svg",
+      "sha256": "c2ced8385f2cf8b17651dd084cf2edddbf935e0d83f40fa86962e9106baae770"
+    },
+    {
+      "code": "MDV",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MDV.svg",
+      "sha256": "54e7170fab8c17ae0ecbaf7b7009563bfe88e360c0bcc185449db9a1073c912e"
+    },
+    {
+      "code": "MEX",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MEX.svg",
+      "sha256": "b2014510d7dfc596a512764c199085b93a8f0fac3003a0e00dbe04629abcc274"
+    },
+    {
+      "code": "MHL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MHL.svg",
+      "sha256": "7b4ae420ac4a0190cef72997778dd9f2beaf81f70f6bbb29c14dfc119f1cd6d0"
+    },
+    {
+      "code": "MKD",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MKD.svg",
+      "sha256": "f731afc23959d0d69733c2c409a78d1e2c9388f8d8c5f259dc480b3c11b44ab1"
+    },
+    {
+      "code": "MLI",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MLI.svg",
+      "sha256": "c21f3a76169a9a83657f946dd0569a68ba6c1389d815d36a55f473b10718c7b6"
+    },
+    {
+      "code": "MLT",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MLT.svg",
+      "sha256": "8f30cb765c58ebc19fda4230d2794084415bf6b1ef3f19da199a9f364d0bb677"
+    },
+    {
+      "code": "MMR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MMR.svg",
+      "sha256": "67ba7d1ed99eca5fd1c7d54205c72b0438ab7183d8702facda287ba37ed46e2a"
+    },
+    {
+      "code": "MNE",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MNE.svg",
+      "sha256": "0c520632e4cddd3895669e4f52123217d42ef802e2945615389fd464c0618dc9"
+    },
+    {
+      "code": "MNG",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MNG.svg",
+      "sha256": "d45e8cda40b386a209dff5571c46bd586ad0876463cf13de4aadf05e11cb1849"
+    },
+    {
+      "code": "MNP",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MNP.svg",
+      "sha256": "bcc7834f8aa3973166f509e9deafd51d0d4fec89f42abcee9f14c05a5ae01601"
+    },
+    {
+      "code": "MOZ",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MOZ.svg",
+      "sha256": "020d34e13a130d9b18199f615f3fa5a9d9bf10cb27ce656d33597922a380b349"
+    },
+    {
+      "code": "MRT",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MRT.svg",
+      "sha256": "071a688c727c8008d801fc431881a40dcbc6c700682c491668dab81368d753f0"
+    },
+    {
+      "code": "MSR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MSR.svg",
+      "sha256": "fce0892bde94ae4b883ba52fb64ef57b54d0402c0e47e193211294ec6db8c7e0"
+    },
+    {
+      "code": "MTQ",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MTQ.svg",
+      "sha256": "bdeff3945cde98052a2f54b3c6492a92f52f7803a5f5c103688683413cebc311"
+    },
+    {
+      "code": "MUS",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MUS.svg",
+      "sha256": "5ae2ba396d5e0191a0afb99f6129ad6dd9c1f17cd40872c6774a3d038a38695e"
+    },
+    {
+      "code": "MWI",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MWI.svg",
+      "sha256": "43a55e34021f6b9ef916353cb869f22549ca876eadd8955cf2ee3c6cf229f0c3"
+    },
+    {
+      "code": "MYS",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MYS.svg",
+      "sha256": "039bb6bd3073af5d78649c1d3cea8af62b1c65ca0354c43119ee1fb3be24e3b3"
+    },
+    {
+      "code": "MYT",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/MYT.svg",
+      "sha256": "76602bdd0a66a225ae976b5822a403f2c7375bc9475ca25138cb836890fead0c"
+    },
+    {
+      "code": "NAM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/NAM.svg",
+      "sha256": "bcfd0e49703cbb313323917d56ee5abb627b74cfb49b8838257a869bbcaac6b7"
+    },
+    {
+      "code": "NCL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/NCL.svg",
+      "sha256": "2638df55cb3fbfa5327dfc24e2964543e65405a1e1401aeeebf94847dd1f8c86"
+    },
+    {
+      "code": "NER",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/NER.svg",
+      "sha256": "948208513b9259bbe0e1dc9ed7abc0ad22c85a06f3cd49f2f4882298db8a7322"
+    },
+    {
+      "code": "NFK",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/NFK.svg",
+      "sha256": "f79c852d760a3855bae6391d13a60254351fc3d8b132a78cf5c02fef18c9ff8a"
+    },
+    {
+      "code": "NGA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/NGA.svg",
+      "sha256": "80da6412c03fa77b3c858720851e993a1f611b25b2abfd7e53e3085ab8e20d5a"
+    },
+    {
+      "code": "NIC",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/NIC.svg",
+      "sha256": "ff7bb7185cad74d28db3e07085982bfb312fb208a0c6df8f857bad17a6274352"
+    },
+    {
+      "code": "NIU",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/NIU.svg",
+      "sha256": "5b61fff9d23d6ecb33b0a452ff4ced20ce3b3a42848fee5256b8ef9fa5c5f8f8"
+    },
+    {
+      "code": "NLD",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/NLD.svg",
+      "sha256": "e437e4525d3e6aebd112849ee6d4d43f7e52cba0b450dcfa30c375c6b3e613fa"
+    },
+    {
+      "code": "NOR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/NOR.svg",
+      "sha256": "b27f389c86fb0f7ac2cd92c1d9d1627a1dd61fb0945427e98ff76333ca5f3814"
+    },
+    {
+      "code": "NPL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/NPL.svg",
+      "sha256": "eb656ab9d2be4bc920c3f61b4f3493c8024182b6f68b308587a877a5595ffb39"
+    },
+    {
+      "code": "NRU",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/NRU.svg",
+      "sha256": "12d9312de9d5d82af1671e7df4fe1a4582b47ce7f9fb1cd65951be1b6f50e5ad"
+    },
+    {
+      "code": "NZL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/NZL.svg",
+      "sha256": "b95abdb5e4ada1cf80722a50d609a70457052588cfdfc4308e0d7050cd20db21"
+    },
+    {
+      "code": "OMN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/OMN.svg",
+      "sha256": "2dc69d2b6cf9f8a81b3abaf4456877752fbf3b8d5bb04e34f0d3df0bfb0ec546"
+    },
+    {
+      "code": "OTT",
+      "kind": "historical-illustration",
+      "license": "CPAL-1.0",
+      "sourceUrl": "https://github.com/Paul2556/Motion",
+      "sha256": "18b713a2343f2bd58a2985f02d9f94f4ac0c5d80b8ba1c122d6483fc37ba23dd"
+    },
+    {
+      "code": "PAK",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/PAK.svg",
+      "sha256": "a6c0960f24672bab0f5faa1748276234609037b74f30ff31714125db895f34bc"
+    },
+    {
+      "code": "PAN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/PAN.svg",
+      "sha256": "e16236c9b346f00e9cdc603b1b5fd89ed820b7a43f67cc6d282de80757045ffe"
+    },
+    {
+      "code": "PCN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/PCN.svg",
+      "sha256": "e99ed3577155c80891239893b3d6054ef57e47ca6ed363b1110bb45b589fe1ae"
+    },
+    {
+      "code": "PER",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/PER.svg",
+      "sha256": "6d41933b3e79db97e5f6d1a33ea36bc628c8f9fca706caa0bbaa58731794e327"
+    },
+    {
+      "code": "PHL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/PHL.svg",
+      "sha256": "9b2fef7c6c182dfb8a5df05430db3db97ba10e47f70e9bf04e09eda090913c73"
+    },
+    {
+      "code": "PLW",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/PLW.svg",
+      "sha256": "97b8db27f00a3a3b35ebd786353762ce0e4e20975036a69d0eb1792a02b977c1"
+    },
+    {
+      "code": "PNG",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/PNG.svg",
+      "sha256": "1b7c218d68e33392e372fc54ba0d03246915d5e7c2e6ad4c7877fd1e31f090c8"
+    },
+    {
+      "code": "POL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/POL.svg",
+      "sha256": "d7b8e09053059f20e57c402c5a5c592cd54e9b5009c64ed1514eb6c2f6e17b24"
+    },
+    {
+      "code": "PRI",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/PRI.svg",
+      "sha256": "be47266ed8469247fe0036b11fc26a5cecd70bf2b86ed0c4850c02fe0f6ed2d7"
+    },
+    {
+      "code": "PRK",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/PRK.svg",
+      "sha256": "0839fd156b3d7d6b16a31bddfd3efc5985d0e9f00ad9732cfd7a47527f4a343e"
+    },
+    {
+      "code": "PRT",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/PRT.svg",
+      "sha256": "18f5d631d1ce152fe62da5f07ec34a73334928928fedff978b0b2f759066f293"
+    },
+    {
+      "code": "PRU",
+      "kind": "historical-illustration",
+      "license": "CPAL-1.0",
+      "sourceUrl": "https://github.com/Paul2556/Motion",
+      "sha256": "5d82db66cb5e01e47c301544b65361f25483aba26b3f8b2b3eb5b14686539f03"
+    },
+    {
+      "code": "PRY",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/PRY.svg",
+      "sha256": "446a258ab8705c3dcae42111dc1acd96e2273118054f8127180188927df6d1a3"
+    },
+    {
+      "code": "PSE",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/PSE.svg",
+      "sha256": "67b89ef71f384e9de7d181ff91215c674c603b95a002ff65dad2abdcb3831bf9"
+    },
+    {
+      "code": "PYF",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/PYF.svg",
+      "sha256": "9b9e2153f2fc6a00f9bc27d62370860f721215640d7a90a3ed2d87b4ad566f80"
+    },
+    {
+      "code": "QAT",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/QAT.svg",
+      "sha256": "f777433e4b55a068b1b7157b3aca8671ce3421864cfb45af39b4d52503ae6991"
+    },
+    {
+      "code": "REU",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/REU.svg",
+      "sha256": "294bd984fb67d497f26886ea4060adaae4b28798f39a129a53bc55f26186a64c"
+    },
+    {
+      "code": "ROE",
+      "kind": "historical-illustration",
+      "license": "CPAL-1.0",
+      "sourceUrl": "https://github.com/Paul2556/Motion",
+      "sha256": "dbd2eb41285597f67361413513a713ce6f06a9b415fc7300c1c2a788b9fda31c"
+    },
+    {
+      "code": "ROU",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ROU.svg",
+      "sha256": "41e491e0e77fea2e10d10335b517dd8ac64baff0e3f86c8334a142e6732e6175"
+    },
+    {
+      "code": "RUS",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/RUS.svg",
+      "sha256": "00526ab8a56a4d077a0dcc25c563db2bf7eee7e35523be3a302aa7bc80eb4b7a"
+    },
+    {
+      "code": "RWA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/RWA.svg",
+      "sha256": "0623a74a955261f41f2cd36daa7ea3dd310d4200ef3244e84dbaecc75d688717"
+    },
+    {
+      "code": "SAU",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SAU.svg",
+      "sha256": "cba01702d994bd325bd4877e457e1da2db1c8436fe7ee6bbf70e4f9a3dfad035"
+    },
+    {
+      "code": "SDN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SDN.svg",
+      "sha256": "4f6de8b63611a09a0ce535e85735c8e8f8caff1e2804ed6bdb22b8b262e0a08b"
+    },
+    {
+      "code": "SEN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SEN.svg",
+      "sha256": "fc9ae0d3d83286bb6e1512080c5177e5ade5a5cdc1d101e86c406b4de8bb740a"
+    },
+    {
+      "code": "SGP",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SGP.svg",
+      "sha256": "7c54cd8c15dcffe9c5219f577427cde8b8ca4ef7904bd842973b28b4b202288e"
+    },
+    {
+      "code": "SGS",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SGS.svg",
+      "sha256": "59680f45972abce0cc54921ca3688a807c902e01c6acec490bc48344aa9eda16"
+    },
+    {
+      "code": "SHN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SHN.svg",
+      "sha256": "947762036bc27c3d863c43d12fc845d3b429819433c22dfc17693c528ddd316d"
+    },
+    {
+      "code": "SJM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SJM.svg",
+      "sha256": "6d991a11eaaef83bbe9d2c92d90b4ab0edf9a30df3784064e8773c402dd058b7"
+    },
+    {
+      "code": "SLB",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SLB.svg",
+      "sha256": "1c75069ad2dbf936cf44d24e5415644550b1716a0a60a16527b4e2ff5c0836f9"
+    },
+    {
+      "code": "SLE",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SLE.svg",
+      "sha256": "22c86953731111a55315a9cce94414c4be049d10e524bb786cb023cb2ff635a5"
+    },
+    {
+      "code": "SLV",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SLV.svg",
+      "sha256": "812110ed215d8effa1530df174930107a4192fcc34149166e8c960ecf5e956a3"
+    },
+    {
+      "code": "SMR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SMR.svg",
+      "sha256": "8a90a201c2e94d9e7d2cfc5bdfba1d1e228c89306dc72770aa10d153474e68fd"
+    },
+    {
+      "code": "SOM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SOM.svg",
+      "sha256": "4beee0392df09fc7c33cc5c6c31188ff5983d5eea58852d962c0e73c072f0ea2"
+    },
+    {
+      "code": "SPM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SPM.svg",
+      "sha256": "59fded7165ee9e14fd5a5b39cd801aa013cbaf09ab21e11cb1c5388d6f69af54"
+    },
+    {
+      "code": "SRB",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SRB.svg",
+      "sha256": "96af92f113cd36b76d2bc17978cb22ff985a93c1582001e4d8015c9f08c914e2"
+    },
+    {
+      "code": "SSD",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SSD.svg",
+      "sha256": "4b2d3f406d45aaff71dba4021adf2f6a4384447ebde2f46ed56b5c30d171f09f"
+    },
+    {
+      "code": "STP",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/STP.svg",
+      "sha256": "827577b4b1403f3ac5f44e5d7185ad87979f85e35673480b3f8fbb8d3df45511"
+    },
+    {
+      "code": "SUR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SUR.svg",
+      "sha256": "2de28d5081f573b3776190e381aa595c22388db10b45b243fba2a50aaa54429f"
+    },
+    {
+      "code": "SVK",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SVK.svg",
+      "sha256": "4b8f5100e00798499b6a365924bfd709c76c21b04fbc78c2812691244c4bed4f"
+    },
+    {
+      "code": "SVN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SVN.svg",
+      "sha256": "83ebd8c21e9a3ca078e673120751f7871519becdfcb27ef6925f67e57cb403e1"
+    },
+    {
+      "code": "SWE",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SWE.svg",
+      "sha256": "7191f2ced0a92f7315d62f1ba72002a7b38480a10f4b8bd060f6f9ca8b002f5a"
+    },
+    {
+      "code": "SWZ",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SWZ.svg",
+      "sha256": "10967484eb1fb918adbc79523aadc518f142eb5482a8a7dda63c8e964f17eca2"
+    },
+    {
+      "code": "SXM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SXM.svg",
+      "sha256": "934c2aba009c8e8b0ee225e56e913d63806ac57570bc7e94fe03300b56f0a6e2"
+    },
+    {
+      "code": "SYC",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SYC.svg",
+      "sha256": "dcc24ce23008cfcd1c136ebcbce5d3376ef48e85b58e3d6f08e5f6cdd3701843"
+    },
+    {
+      "code": "SYR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/SYR.svg",
+      "sha256": "e57f08c2914b7e2df46c6257f02d6203d2e14e140e1fb3cddf56f8fe123d2f90"
+    },
+    {
+      "code": "TCA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TCA.svg",
+      "sha256": "36154f54d47d8b49e57fae24b12b8252a78aeb45186d19dcb6d36d2056f52a77"
+    },
+    {
+      "code": "TCD",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TCD.svg",
+      "sha256": "9960ca049644dbc2af206d6dec2b51f5d8eae23fdc3744e6681f805cda9a0370"
+    },
+    {
+      "code": "TGO",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TGO.svg",
+      "sha256": "1767124c6f36799f1b26840e59edf12ff7a0b5c1fd1b6d594e3624ded32e34e3"
+    },
+    {
+      "code": "THA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/THA.svg",
+      "sha256": "4cbe2875ccacd267b8f8c85a4d0c7a8427020a88a0825c5f364fe47a5fcff74b"
+    },
+    {
+      "code": "TJK",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TJK.svg",
+      "sha256": "e4e4a21fbdd549176b9edc1a1c48244fe4b68da56ed5620f3096d3de0e6aa88e"
+    },
+    {
+      "code": "TKL",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TKL.svg",
+      "sha256": "8378429d0118390163683e128c0a8b6da695a6ee0354951adf48c04a348be0a8"
+    },
+    {
+      "code": "TKM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TKM.svg",
+      "sha256": "6c9da0f1eb24230466ef5d1fe039641e9cc3fce60a7a7df6fc8695bdfe34f14b"
+    },
+    {
+      "code": "TLS",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TLS.svg",
+      "sha256": "ab00f55580be07cd753866ecca013977c206c94386f58816f12075e7364fbc26"
+    },
+    {
+      "code": "TON",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TON.svg",
+      "sha256": "03a7a04e0751706d442676c6af7aa9551b1a06f62607ba2427032a7e922f20c6"
+    },
+    {
+      "code": "TTO",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TTO.svg",
+      "sha256": "12e08027e7a731064ce86a634fd48f700adf0041fba543dc63ea7d1972abbb96"
+    },
+    {
+      "code": "TUN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TUN.svg",
+      "sha256": "40b94619517822d032accacfd0d81bca39692e443c31d60919e849889ce4f0ac"
+    },
+    {
+      "code": "TUR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TUR.svg",
+      "sha256": "cdc9fafbf1ebce37c039b58516cf6b7f5d699919ece737b5add6eec0f26d4130"
+    },
+    {
+      "code": "TUV",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TUV.svg",
+      "sha256": "e3d68a37d9e5fd049fc7d3e6c2f350b918f63eb5f211fa9fa61f4de6bbdf2c2f"
+    },
+    {
+      "code": "TWN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TWN.svg",
+      "sha256": "5a1e19c46051dfe2ea829567f6af1a3f6eac09d1731f226b21d388ed491fcc43"
+    },
+    {
+      "code": "TZA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/TZA.svg",
+      "sha256": "7fcf39383f4007fe58b1c3c159af08a6f5b8eabd4fa65d13ceb6da7b8e300ed8"
+    },
+    {
+      "code": "UGA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/UGA.svg",
+      "sha256": "f6027660c506a7c7fa0df13e11e345c0c333dfd7ab41158b1fc8d23ccb09818f"
+    },
+    {
+      "code": "UKR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/UKR.svg",
+      "sha256": "19c2e16b06f757590431c1219b3716c9179b0a892fe389b7c99545b7c43d3b79"
+    },
+    {
+      "code": "UMI",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/UMI.svg",
+      "sha256": "0e0b162ef10b341ff31c9414ebe7f40f4852d1303ea84fa3f557ac03a1b03ab6"
+    },
+    {
+      "code": "URY",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/URY.svg",
+      "sha256": "3ebdc81d16c7fe0f19aa05101aaa28c14bbb0a5ebd00dda1ebb0563495160462"
+    },
+    {
+      "code": "USA",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/USA.svg",
+      "sha256": "1b95f18e1b91cbcaa5ecb83712a8aae25e0df7f4e2254509d6ec25c4b6e9074e"
+    },
+    {
+      "code": "UZB",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/UZB.svg",
+      "sha256": "f0fbc12164906aab0dacf970914b861b2247ec9ac6b385c2cf0ba5b81fc138a4"
+    },
+    {
+      "code": "VAT",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/VAT.svg",
+      "sha256": "e0a8b2ff84362949dd1303e175c699e69f51c9b0b29576f65099fed602b79803"
+    },
+    {
+      "code": "VCT",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/VCT.svg",
+      "sha256": "aec8c31241ad6fa9a2aa92c6fcdd58bd1eff25e77c40bbf72f8178d121947a3b"
+    },
+    {
+      "code": "VEN",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/VEN.svg",
+      "sha256": "b52a261645ce73f78b85df08dba02ebd7aeb94e49c037637f47b7df8e7c8f56a"
+    },
+    {
+      "code": "VGB",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/VGB.svg",
+      "sha256": "d762293824aaec637091ea005330130f2a0b393a1c79d1f22475f49f0e6d6518"
+    },
+    {
+      "code": "VIR",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/VIR.svg",
+      "sha256": "0fdfb221e604c01469f9ccbe635cc1cf158c937d2181fd6a67c829b18e836b20"
+    },
+    {
+      "code": "VNM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/VNM.svg",
+      "sha256": "892b9fa12e41819a35b18420d4dbfd92d56ec11737c32ab357d836305f11351a"
+    },
+    {
+      "code": "VUT",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/VUT.svg",
+      "sha256": "8d9983a5868a4d0a4a78e835bb3bcc92977a89703a70eee25771d29a8b71d8b2"
+    },
+    {
+      "code": "WLF",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/WLF.svg",
+      "sha256": "7cea53a8289fbff3fbeb33e8fc638f93bea7e964c3ea2e90af5211f7d7b5084b"
+    },
+    {
+      "code": "WSM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/WSM.svg",
+      "sha256": "4264f67976fa61ee45e40a8d4c62271f369bfa4b0a6b048f61c2638d64e8128b"
+    },
+    {
+      "code": "YEM",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/YEM.svg",
+      "sha256": "9563a9487fdfd6cac89b0cdefcabe6122e666d546e355c9f2b44077744d768d8"
+    },
+    {
+      "code": "ZAF",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ZAF.svg",
+      "sha256": "333a42cc0d7f681ebbd6ab1e7642fbb62cad17e388a7b9d16c963f196b898994"
+    },
+    {
+      "code": "ZMB",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ZMB.svg",
+      "sha256": "dd6e99719e7ba54b5ca8a140225b8f72d0a34e46401212317dc05a34092f0de5"
+    },
+    {
+      "code": "ZWE",
+      "kind": "flagpack",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/Yummygum/flagpack-core/blob/6e57695337a46831d3772ab4945d7a7f8e25d5c1/lib/flags/l/ZWE.svg",
+      "sha256": "0f6e48db623378e6054342ff37763c813d055bd5952bf6d76f98b1f5d70733c6"
+    }
+  ]
+}

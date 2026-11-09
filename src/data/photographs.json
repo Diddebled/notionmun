@@ -1,0 +1,36 @@
+[
+  {
+    "id": "security-council",
+    "title": "United Nations Headquarters - Security Council chamber, angled view (cropped)",
+    "venue": "UN Security Council chamber, New York",
+    "author": "James D. Forrester (Jdforrester)",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:United_Nations_Headquarters_-_Security_Council_chamber,_angled_view_(cropped).jpg",
+    "sourceRevisionUrl": "https://commons.wikimedia.org/w/index.php?title=File:United_Nations_Headquarters_-_Security_Council_chamber,_angled_view_(cropped).jpg&oldid=1116331164",
+    "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/United_Nations_Headquarters_-_Security_Council_chamber%2C_angled_view_%28cropped%29.jpg/1280px-United_Nations_Headquarters_-_Security_Council_chamber%2C_angled_view_%28cropped%29.jpg",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "changes": "Existing crop by EUPBR on Wikimedia Commons retained. Wikimedia-generated 1280-pixel thumbnail; displayed responsively without further cropping, filters or editorial edits.",
+    "verifiedOn": "2026-10-30",
+    "src": "/images/un-security-council.jpg",
+    "alt": "The empty United Nations Security Council chamber, with blue chairs around a horseshoe-shaped table in New York.",
+    "width": 1280,
+    "height": 768
+  },
+  {
+    "id": "general-assembly",
+    "title": "UN-Vollversammlung",
+    "venue": "UN General Assembly Hall, New York",
+    "author": "Jannis Raabe (Jonaes02)",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:UN-Vollversammlung.jpg",
+    "sourceRevisionUrl": "https://commons.wikimedia.org/w/index.php?title=File:UN-Vollversammlung.jpg&oldid=931584538",
+    "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/UN-Vollversammlung.jpg/1280px-UN-Vollversammlung.jpg",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "changes": "Wikimedia-generated 1280-pixel thumbnail; displayed responsively without cropping, filters or editorial edits.",
+    "verifiedOn": "2026-10-30",
+    "src": "/images/un-general-assembly.jpg",
+    "alt": "Rows of desks facing the podium and gold wall in the United Nations General Assembly Hall in New York.",
+    "width": 1280,
+    "height": 960
+  }
+]

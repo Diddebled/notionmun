@@ -1,0 +1,89 @@
+rules_version = '2';
+
+// memberIds is one unified list rather than an ownerId/collaboratorIds OR:
+// Firestore can't prove a two-field OR from a list query's own filters, so
+// that shape silently breaks "sessions I own or collaborate on". Confirmed by
+// testing, not theoretical.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isMember(data) {
+      return request.auth != null && request.auth.uid in data.memberIds;
+    }
+
+    function isSessionMember(sessionId) {
+      return isMember(get(/databases/$(database)/documents/sessions/$(sessionId)).data);
+    }
+
+    match /sessions/{sessionId} {
+      // Inline and untyped on purpose, mirroring listMySessions' query
+      // exactly. Both a redundant type check and routing through a helper
+      // empirically broke the validator's proof and denied every list.
+      allow read: if request.auth != null && request.auth.uid in resource.data.memberIds;
+      // Only the owner can rename/reconfigure the session or delete it, and
+      // an update can never drop the owner's own uid from memberIds - that
+      // would lock them out of their own session.
+      allow update: if request.auth != null && request.auth.uid == resource.data.ownerId
+        && request.auth.uid in request.resource.data.memberIds;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.ownerId;
+      // Exactly [creator] at creation, or a crafted write could plant a
+      // session in an arbitrary victim's list. Collaborators are added
+      // afterward via the owner-gated update rule above.
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.ownerId
+        && request.resource.data.memberIds == [request.auth.uid];
+
+      match /attendance/{delegateId} {
+        allow read, write: if isSessionMember(sessionId);
+      }
+
+      // Public delegate view (delegate.motionmun.com) - a deliberately narrow
+      // mirror of currentSpeaker/queue/timer/activeMotion only. No login on
+      // that subdomain, so read must be open; writes stay chair-only.
+      match /live/{docId} {
+        allow read: if true;
+        allow write: if isSessionMember(sessionId);
+      }
+    }
+
+    // Admin-SDK-only collections, which bypass these rules entirely, so
+    // `if false` is the point rather than a bug to relax. sourceRequests and
+    // sourceTokens are vestigial now that the source-request flow is gone.
+    match /sourceRequests/{requestId} {
+      allow read, write: if false;
+    }
+
+    match /sourceTokens/{token} {
+      allow read, write: if false;
+    }
+
+    match /rateLimits/{ip} {
+      allow read, write: if false;
+    }
+
+    // Account-synced motion presets/shortcuts (src/services/prefsSync.js) -
+    // one doc per user, only ever read/written by that user themselves.
+    match /userPrefs/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Self-read so a contributor's client can check its own flags, but writes
+    // never go through client rules, since only the owner may grant access.
+    match /contributorPermissions/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // Per-destination-address welcome-email cooldown (api/waitlist/welcome.js) -
+    // Admin-SDK-only, same reasoning as rateLimits above.
+    match /waitlistSends/{emailHash} {
+      allow read, write: if false;
+    }
+
+    // Plaintext waitlist emails for the admin panel's Announcements tab
+    // (api/admin/announcements.js) - Admin-SDK-only, same reasoning as
+    // waitlistSends above.
+    match /waitlistSubscribers/{emailHash} {
+      allow read, write: if false;
+    }
+  }
+}

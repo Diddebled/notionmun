@@ -1,0 +1,12 @@
+node_modules/
+dist/
+__pycache__/
+.env
+.env.local
+test-results/
+*.log
+.vercel/
+public/notionmun-source.zip
+
+.vercel
+.env*

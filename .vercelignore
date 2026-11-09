@@ -1,0 +1,13 @@
+.git/
+.agents/
+.codex/
+.aws/
+.vercel/
+node_modules/
+dist/
+test-results/
+__pycache__/
+.env*
+*.log
+app.js
+styles.css

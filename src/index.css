@@ -1,0 +1,311 @@
+@import './themes.css';
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+html { scroll-behavior: auto; }
+/* Rubber-band overscroll (scrolling past the bottom of the page) reveals this
+   background before the page snaps back, so it needs to match whichever
+   shell is actually mounted rather than a fixed color - default here is
+   app-shell's dark bg (the common case), overridden below for app-shell's
+   light mode and for LandingPage's theme-shell. */
+body { margin: 0; min-width: 320px; background: #0d0d0d; font-family: Inter, ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+html[data-app-theme="light"] body:has(.app-shell) { background: #f2f2f2; }
+html[data-app-theme="brown"] body:has(.app-shell) { background: #17110a; }
+/* Matches LandingPage's footer, which is unconditionally dark (bg-[#101010]) in both light and dark mode - see the footer comment in this file. */
+body:has(.theme-shell) { background: #101010; }
+::selection { background: var(--color-surface-dark); color: #fff; }
+
+/* MotionInput's invalid-duration feedback (speaking time > total time). The
+   app-shell's reduced-motion rule (transition/animation: none !important)
+   already suppresses this for users who've turned that on. why do I have to do this myself ;-;*/
+@keyframes motion-input-shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+.motion-input-shake { animation: motion-input-shake .3s linear; }
+
+@layer components {
+  .page-container { @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12; }
+  .section-pad { @apply py-20 sm:py-28 lg:py-36; }
+  .section-pad-sm { @apply py-12 sm:py-16; }
+  .section-label, .eyebrow { @apply text-[10px] font-medium uppercase tracking-[0.2em] text-black/40; }
+  .eyebrow { @apply inline-flex items-center gap-2 border border-black/15 bg-white/60 px-3 py-2; }
+  .eyebrow::before { content: ''; @apply h-1.5 w-1.5 rounded-full; background: var(--accent); }
+  .section-title { @apply text-4xl font-medium leading-[1.03] tracking-[-0.045em] sm:text-5xl lg:text-6xl; }
+  .button-primary { @apply inline-flex items-center gap-2 text-sm font-medium text-white transition-all; background: var(--accent); border-radius: 7px; padding: 0.5rem 1rem; transition:
+    background-color .25s,
+    transform .25s cubic-bezier(.22,1,.36,1),
+    box-shadow .25s;}
+  .button-primary:hover { filter: brightness(1.1); transform: translateY(-1px);
+  box-shadow:
+    0 10px 24px rgba(var(--accent-rgb),.18),
+    inset 0 0 0 1px rgba(255,255,255,.08);}
+  .button-primary:active {
+    transform: translateY(0);
+  }
+  .button-secondary { @apply inline-flex items-center gap-2 border border-black/15 bg-white text-sm font-medium transition-all hover:border-black; }
+  .nav-link { @apply transition-colors hover:text-black; }
+  .sandwich-toggle { @apply inline-flex h-9 w-9 items-center justify-center border border-black/15 bg-transparent transition-all hover:bg-black hover:text-white; }
+  .dropdown-link { @apply flex items-center justify-between px-3 py-2.5 text-sm transition-colors hover:bg-white hover:text-black; }
+  .dropdown-control { @apply flex w-full items-center gap-3 px-3 py-3 text-left transition-colors hover:bg-white; }
+  .dropdown-control-icon { @apply flex h-8 w-8 shrink-0 items-center justify-center border border-black/10 bg-white; }
+  .product-shell { @apply overflow-hidden border border-black/20 bg-[var(--color-surface-dark)] shadow-[0_30px_90px_rgba(0,0,0,.18)]; }
+  .ui-label { @apply text-[9px] font-medium uppercase tracking-[0.17em] text-white/35; }
+  .status-chip { @apply border border-white/10 px-2.5 py-1.5 text-[8px] uppercase tracking-[0.12em] text-white/45; }
+  .ui-button { @apply flex items-center gap-2 bg-white px-4 py-2 text-xs text-black; }
+  .ui-button-muted { @apply border border-white/15 px-4 py-2 text-xs text-white/50; }
+}
+
+.accent-text { color: var(--accent); }
+.accent-bg { background-color: var(--accent); }
+.accent-border { border-color: var(--accent); }
+.section-label { color: var(--accent); }
+.theme-dark .button-primary { color: black; }
+.theme-dark .group:hover .step-icon { color: black; }
+.logo-link {
+  display: inline-flex;
+  border-radius: 999px;
+  outline-offset: 6px;
+  transition: color .25s ease, transform .25s cubic-bezier(.22, 1, .36, 1);
+}
+.logo-link svg {
+  transition: transform .32s cubic-bezier(.22, 1, .36, 1), filter .32s ease;
+  transform-origin: 36% 50%;
+}
+.logo-link:hover {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.logo-link:hover svg {
+  filter: drop-shadow(0 6px 12px rgba(var(--accent-rgb), .18));
+  transform: rotate(-4deg) scale(1.06);
+}
+.sandwich-toggle:hover,
+.sandwich-toggle.is-active {
+  border-color: black;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+  transform: translateY(-1px);
+}
+.sandwich-toggle.is-active {
+  background: black;
+  color: white;
+}
+.sandwich-menu {
+  animation: dropdown-in .18s cubic-bezier(.22, 1, .36, 1) both;
+  transform-origin: top right;
+}
+.dropdown-control:hover .dropdown-control-icon {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.hero-grid { background-image: linear-gradient(rgba(0,0,0,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.045) 1px, transparent 1px); background-size: 48px 48px; mask-image: linear-gradient(to bottom, black, transparent 85%); animation: gridFloat 14s ease-in-out infinite; }
+.hero-grid-float {
+  animation: gridFloat 14s ease-in-out infinite;
+}
+
+@keyframes gridFloat {
+  0%,100% {
+    transform: translate(0,0);
+  }
+
+  25% {
+    transform: translateY(-3px);
+  }
+
+  50% {
+    transform: translateX(2px);
+  }
+
+  75% {
+    transform: translateY(3px);
+  }
+}
+.product-shell { border-top: 3px solid var(--accent); }
+.timer-ring { border-radius: 50%; background: radial-gradient(circle at center, var(--color-surface-dark) 68%, transparent 69%), conic-gradient(var(--accent) 0 80%, rgba(255,255,255,.12) 80% 100%); }
+.tool-push {
+  opacity: 0;
+  transform: translateX(var(--push-x, 0));
+  transition: opacity .65s cubic-bezier(.22, 1, .36, 1), transform .65s cubic-bezier(.22, 1, .36, 1);
+}
+.tool-push.is-visible { opacity: 1; transform: translateX(0); }
+.tool-push:nth-child(1) { --push-x: 150%; }
+.tool-push:nth-child(2) { --push-x: 50%; }
+.tool-push:nth-child(3) { --push-x: -50%; }
+.tool-push:nth-child(4) { --push-x: -150%; }
+@media (max-width: 639px) {
+  .tool-push:nth-child(1), .tool-push:nth-child(3) { --push-x: 60%; }
+  .tool-push:nth-child(2), .tool-push:nth-child(4) { --push-x: -60%; }
+}
+.feature-card-reveal {
+  display: flex;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(34px) scale(.985);
+  transition:
+    opacity .95s cubic-bezier(.22, 1, .36, 1),
+    filter .95s cubic-bezier(.22, 1, .36, 1),
+    transform .95s cubic-bezier(.22, 1, .36, 1);
+  will-change: opacity, filter, transform;
+  background: var(--color-page-light);
+}
+.feature-card-reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+.feature-card {
+  transition:
+    background-color .28s ease,
+    box-shadow .28s ease,
+    transform .28s cubic-bezier(.22, 1, .36, 1);
+}
+.feature-card:hover {
+  box-shadow: inset 0 3px 0 var(--accent);
+  transform: translateY(-2px);
+}
+.group:hover .step-icon { background: var(--accent); border-color: var(--accent); color: white; }
+.theme-shell > header,
+.theme-shell > main { transition: filter .45s cubic-bezier(.22, 1, .36, 1); }
+.theme-dark > header,
+.theme-dark > main { filter: invert(1); }
+
+/* Footer is unconditionally dark-authored (bg-[#101010], text-white) rather
+   than flipping with the theme like header/main - it never inverts, so it
+   just stays the same dark band in both modes instead of flipping to a
+   jarring light one under dark mode. */
+
+/* The embedded SessionBoard preview (.product-shell) and the feature-section
+   demo widgets (.product-demo: VoteDemo/TimerDemo/QueueDemo/MotionInputDemo)
+   are real demos of the actual (permanently dark) app UI, deliberately kept
+   outside .app-shell - see LandingPage.jsx's comments above each. Nested
+   inside .theme-dark > main, they'd otherwise inherit that invert and flip to
+   a bright light card; a second invert here cancels the ancestor's out,
+   keeping them dark like the real product. --accent is re-overridden to the
+   true (non-pre-inverted) brown too - the inherited --accent from
+   .theme-shell.theme-dark is already pre-inverted for exactly one ancestor
+   invert (the page-wide one), so surviving this second, local invert as well
+   needs the plain value instead. */
+.theme-dark .product-shell,
+.theme-dark .product-demo { filter: invert(1); --accent: #9a5b3a; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes dropdown-in { from { opacity: 0; transform: translateY(-6px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.fade-up { animation: rise .7s cubic-bezier(.22,1,.36,1) both; }
+.fade-up-delay { animation: rise .8s .08s cubic-bezier(.22,1,.36,1) both; }
+.fade-up-delay-2 { animation: rise .8s .18s cubic-bezier(.22,1,.36,1) both; }
+
+.motion-reduced .fade-up,
+.motion-reduced .fade-up-delay,
+.motion-reduced .fade-up-delay-2 {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+.motion-reduced .feature-card-reveal {
+  opacity: 1;
+  filter: none;
+  transform: none;
+  transition: opacity .2s ease;
+}
+.motion-reduced .tool-push {
+  opacity: 1;
+  transform: none;
+  transition: opacity .2s ease;
+}
+.motion-reduced .feature-card,
+.motion-reduced .logo-link,
+.motion-reduced .logo-link svg,
+.motion-reduced .sandwich-toggle,
+.motion-reduced .sandwich-menu,
+.motion-reduced .dropdown-link,
+.motion-reduced .dropdown-control,
+.motion-reduced .dropdown-control-icon,
+.theme-shell.motion-reduced > header,
+.theme-shell.motion-reduced > main,
+.theme-shell.motion-reduced > footer {
+  animation: none;
+  transition-duration: .01ms;
+}
+.motion-reduced .feature-card:hover,
+.motion-reduced .logo-link:hover,
+.motion-reduced .sandwich-toggle:hover {
+  transform: none;
+}
+.motion-reduced .logo-link:hover svg {
+  transform: none;
+}
+.motion-reduced .faq-panel,
+.motion-reduced .faq-chevron {
+  transition-duration: .01ms;
+}
+.email-caret {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  width: 1.5px;
+  height: 18px;
+  background: var(--accent);
+  transform: translateY(-50%);
+  animation: blink 1s steps(1) infinite;
+  pointer-events: none;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+#email {
+  transition:
+    border-color .25s,
+    box-shadow .25s;
+}
+
+#email:focus {
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb),.08);
+}
+
+#email::placeholder {
+  transition: opacity .2s;
+}
+
+#email:focus::placeholder {
+  opacity: .35;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.22);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,.12) transparent;
+}

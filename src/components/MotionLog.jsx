@@ -1,0 +1,83 @@
+import { formatDuration } from "../utils/duration";
+
+// A snapshot of each motion's parsed meta at submit time, so later roster
+// edits can't retroactively change what a chair already logged. `secondCount`
+// is stored rather than derived, since nothing else implies it.
+export default function MotionLog({ entries, onDelete, onVote, onAdjustSecond, maxSeconds = Infinity, selectedIndex = -1 }) {
+  if (entries.length === 0) return null;
+
+  return (
+    <div className="mt-4 space-y-2">
+      {entries.map((entry, i) => (
+        <div
+          key={entry.id ?? i}
+          className={`border p-4 transition ${
+            i === selectedIndex ? "border-[var(--app-border-active)] bg-[var(--app-panel)]" : "border-[var(--app-border)] bg-[var(--app-panel)]"
+          }`}
+        >
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="text-base font-semibold text-[var(--app-text)]">{entry.motion ?? "Untitled motion"}</h3>
+            {entry.secondCount > 0 && (
+              <span className="border border-[var(--motion-accent)] px-1.5 py-0.5 text-[9px] uppercase tracking-[0.14em] text-[var(--motion-accent)]">
+                Seconded ×{entry.secondCount}
+              </span>
+            )}
+          </div>
+          {entry.topic && <p className="mt-0.5 text-sm text-[var(--app-text-muted)]">{entry.topic}</p>}
+
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-sm text-[var(--app-text-secondary)]">
+            <span>Proposer: {entry.delegation ?? "-"}</span>
+            <span className="flex flex-wrap gap-x-4">
+              {entry.totalTime != null && <span>{formatDuration(entry.totalTime)} total</span>}
+              {entry.speakingTime != null && <span>{formatDuration(entry.speakingTime)} per speaker</span>}
+            </span>
+          </div>
+
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button
+              onClick={() => onVote?.(entry)}
+              className="border border-[var(--app-border)] px-4 py-1.5 text-xs uppercase tracking-[0.16em] text-[var(--app-text-secondary)] transition hover:bg-[var(--app-chip-active)]"
+            >
+              Voting
+            </button>
+            {entry.secondCount > 0 ? (
+              <div className="flex items-stretch border border-[var(--motion-accent)] text-[var(--motion-accent)]">
+                <button
+                  onClick={() => onAdjustSecond?.(i, -1)}
+                  aria-label="Decrease seconds"
+                  className="px-3 text-xs transition hover:bg-[rgba(var(--motion-accent-rgb),0.1)]"
+                >
+                  −
+                </button>
+                <span className="flex items-center border-x border-[var(--motion-accent)] px-3 text-xs uppercase tracking-[0.16em]">
+                  Seconded {entry.secondCount}
+                </span>
+                <button
+                  onClick={() => onAdjustSecond?.(i, 1)}
+                  disabled={entry.secondCount >= maxSeconds}
+                  aria-label="Increase seconds"
+                  className="px-3 text-xs transition hover:bg-[rgba(var(--motion-accent-rgb),0.1)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
+                >
+                  +
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => onAdjustSecond?.(i, 1)}
+                className="border border-[var(--app-border)] px-4 py-1.5 text-xs uppercase tracking-[0.16em] text-[var(--app-text-secondary)] transition hover:bg-[var(--app-chip-active)]"
+              >
+                Second
+              </button>
+            )}
+            <button
+              onClick={() => onDelete?.(i)}
+              className="border border-[rgba(var(--danger-rgb),0.4)] px-4 py-1.5 text-xs uppercase tracking-[0.16em] text-[var(--danger)] outline-none transition hover:bg-[rgba(var(--danger-rgb),0.1)] focus-visible:border-[var(--danger)]"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}

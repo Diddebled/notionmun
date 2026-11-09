@@ -1,0 +1,582 @@
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ConferenceService from "../services/ConferenceService";
+import AllocationParser from "../services/AllocationParser";
+import { usePagePermission } from "../services/permissions";
+import MotionInput from "../components/MotionInput";
+import MotionLog from "../components/MotionLog";
+import Flag from "../components/Flag";
+import DebugTopBar from "../components/DebugTopBar";
+
+// Dev-only tooling gated on the "debug" permission. A convenience redirect
+// rather than a real boundary, which is fine since this page only touches the
+// current tab's in-memory state, never other users' data.
+
+export default function DebugPage() {
+  const navigate = useNavigate();
+  const { allowed: isAuthorized, ready: authReady } = usePagePermission("debug");
+
+  // Waits for authReady, since redirecting on the momentarily-null state
+  // would boot an authorized user during startup. The debug host needs a
+  // cross-origin redirect because "/home" lives on a different subdomain
+  // there; everywhere else the ordinary client-side navigate works.
+  useEffect(() => {
+    if (!authReady || isAuthorized) return;
+
+    if (window.location.hostname === "debug.motionmun.com") {
+      window.location.replace("https://app.motionmun.com/");
+    } else {
+      navigate("/home");
+    }
+  }, [authReady, isAuthorized, navigate]);
+
+  const [conference, setConference] = useState(null);
+  const [committees, setCommittees] = useState([]);
+  const [delegates, setDelegates] = useState([]);
+  const [selectedCommittee, setSelectedCommittee] = useState("");
+  const [parsedCommittees, setParsedCommittees] = useState([]);
+  const [motionText, setMotionText] = useState("");
+  const [fuzzyLevel, setFuzzyLevel] = useState(0.3);
+  const [motionLog, setMotionLog] = useState([]);
+
+  const delegations = useMemo(
+    () => delegates.map((d) => ({ name: d.countryDisplay, code: d.countryCode })),
+    [delegates]
+  );
+
+  async function loadConference(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const parser = new AllocationParser();
+      const parsed = await parser.load(file);
+
+      setParsedCommittees(parsed.committees);
+    } catch (error) {
+      console.error(error);
+    }
+
+    try {
+      const data = await ConferenceService.loadConference(file);
+
+      setConference(data);
+
+      const loadedCommittees =
+        ConferenceService.getCommittees();
+
+      setCommittees(loadedCommittees);
+
+      if (loadedCommittees.length > 0) {
+        selectCommittee(loadedCommittees[0].id);
+      }
+    } catch (error) {
+      console.error(error);
+
+      alert("Failed to load workbook.");
+    }
+  }
+
+  function selectCommittee(id) {
+    setSelectedCommittee(id);
+
+    ConferenceService.setActiveCommittee(id);
+
+    setDelegates(
+      ConferenceService.getDelegates()
+    );
+  }
+
+  function resetConference() {
+    ConferenceService.reset();
+
+    setConference(null);
+    setCommittees([]);
+    setDelegates([]);
+    setSelectedCommittee("");
+    setParsedCommittees([]);
+  }
+
+  function dumpJSON() {
+    console.log(
+      ConferenceService.getConference()
+    );
+  }
+
+  if (!authReady || !isAuthorized) return null;
+
+  return (
+    <div className="app-shell min-h-screen bg-[var(--app-bg)] p-8 text-[var(--app-text)]">
+
+      <div className="mx-auto max-w-7xl">
+
+        <DebugTopBar />
+
+        <h1 className="text-4xl font-semibold">
+          Motion Debug
+        </h1>
+
+        <p className="mt-2 text-[var(--app-text-muted)]">
+          ConferenceService Debugger
+        </p>
+
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+
+          {/* Conference */}
+
+          <div className="border border-[var(--app-border)] bg-[var(--app-panel)] p-6">
+
+            <h2 className="text-xl font-semibold">
+              Conference
+            </h2>
+
+            <div className="mt-6 space-y-4">
+
+              <input
+                type="file"
+                accept=".xlsx"
+                onChange={loadConference}
+                className="block w-full border border-[var(--app-border)] bg-[var(--app-input)] p-3"
+              />
+
+              <div>
+
+                <p className="text-[var(--app-text-muted)]">
+                  Loaded
+                </p>
+
+                <p>
+                  {ConferenceService.isLoaded()
+                    ? "Yes"
+                    : "No"}
+                </p>
+
+              </div>
+
+              <div>
+
+                <p className="text-[var(--app-text-muted)]">
+                  Conference Name
+                </p>
+
+                <p>
+                  {conference?.name ?? "-"}
+                </p>
+
+              </div>
+
+              <div>
+
+                <p className="text-[var(--app-text-muted)]">
+                  Committees
+                </p>
+
+                <p>
+                  {committees.length}
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* Committee */}
+
+          <div className="border border-[var(--app-border)] bg-[var(--app-panel)] p-6">
+
+            <h2 className="text-xl font-semibold">
+              Committee
+            </h2>
+
+            <div className="mt-6">
+
+              <select
+                value={selectedCommittee}
+                onChange={(e) =>
+                  selectCommittee(e.target.value)
+                }
+                className="w-full border border-[var(--app-border)] bg-[var(--app-input)] p-3"
+              >
+                {committees.map((committee) => (
+                  <option
+                    key={committee.id}
+                    value={committee.id}
+                  >
+                    {committee.committee}
+                  </option>
+                ))}
+              </select>
+
+            </div>
+
+            <div className="mt-6 space-y-4">
+
+              <div>
+
+                <p className="text-[var(--app-text-muted)]">
+                  Active Committee
+                </p>
+
+                <p>
+                  {selectedCommittee || "-"}
+                </p>
+
+              </div>
+
+              <div>
+
+                <p className="text-[var(--app-text-muted)]">
+                  Delegates
+                </p>
+
+                <p>
+                  {delegates.length}
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+                    {/* Delegates */}
+
+          <div className="border border-[var(--app-border)] bg-[var(--app-panel)] p-6 lg:col-span-2">
+
+            <div className="flex items-center justify-between">
+
+              <h2 className="text-xl font-semibold">
+                Delegates
+              </h2>
+
+              <span className="text-sm text-[var(--app-text-muted)]">
+                {delegates.length} loaded
+              </span>
+
+            </div>
+
+            <div className="mt-6 max-h-[400px] overflow-y-auto border border-[var(--app-border)]">
+
+              <table className="w-full border-collapse">
+
+                <thead className="sticky top-0 bg-[var(--app-input)]">
+
+                  <tr>
+
+                    <th className="border-b border-[var(--app-border)] p-3 text-left">
+                      #
+                    </th>
+
+                    <th className="border-b border-[var(--app-border)] p-3 text-left">
+                      Delegation
+                    </th>
+
+                    <th className="border-b border-[var(--app-border)] p-3 text-left">
+                      Delegate
+                    </th>
+
+                    <th className="border-b border-[var(--app-border)] p-3 text-left">
+                      Present
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody>
+
+                  {delegates.map((delegate, index) => (
+
+                    <tr
+                      key={delegate.id}
+                      className="border-b border-[var(--app-border-faint)] hover:bg-[var(--app-chip)]"
+                    >
+
+                      <td className="p-3">
+                        {index + 1}
+                      </td>
+
+                      <td className="p-3">
+                        <span className="inline-flex items-center gap-2">
+                          <Flag countryCode={delegate.countryCode} />
+                          {delegate.countryDisplay}
+                        </span>
+                      </td>
+
+                      <td className="p-3">
+                        {delegate.delegate}
+                      </td>
+
+                      <td className="p-3">
+                        {delegate.present ? "✅" : "❌"}
+                      </td>
+
+                    </tr>
+
+                  ))}
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+          </div>
+
+          {/* Statistics */}
+
+          <div className="border border-[var(--app-border)] bg-[var(--app-panel)] p-6">
+
+            <h2 className="text-xl font-semibold">
+              Statistics
+            </h2>
+
+            <div className="mt-6 space-y-3">
+
+              {ConferenceService.isLoaded() && (() => {
+                const stats =
+                  ConferenceService.getStatistics();
+
+                return (
+                  <>
+                    <p>
+                      Delegates: {stats.delegates}
+                    </p>
+
+                    <p>
+                      Present: {stats.present}
+                    </p>
+
+                    <p>
+                      Spoken: {stats.spoken}
+                    </p>
+
+                    <p>
+                      Total Speaking Time:{" "}
+                      {stats.totalSpeakingTime}s
+                    </p>
+                  </>
+                );
+              })()}
+
+            </div>
+
+          </div>
+
+          {/* Tools */}
+
+          <div className="border border-[var(--app-border)] bg-[var(--app-panel)] p-6">
+
+            <h2 className="text-xl font-semibold">
+              Tools
+            </h2>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+
+              <button
+                onClick={dumpJSON}
+                className="border border-[var(--app-border)] px-5 py-3 hover:bg-[var(--app-chip-active)]"
+              >
+                Console Log
+              </button>
+
+              <button
+                onClick={() =>
+                  console.log(
+                    JSON.stringify(
+                      ConferenceService.getConference(),
+                      null,
+                      2
+                    )
+                  )
+                }
+                className="border border-[var(--app-border)] px-5 py-3 hover:bg-[var(--app-chip-active)]"
+              >
+                Dump JSON
+              </button>
+
+              <button
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    JSON.stringify(
+                      ConferenceService.getConference(),
+                      null,
+                      2
+                    )
+                  )
+                }
+                className="border border-[var(--app-border)] px-5 py-3 hover:bg-[var(--app-chip-active)]"
+              >
+                Copy JSON
+              </button>
+
+              <button
+                onClick={resetConference}
+                className="border border-[rgba(var(--danger-rgb),0.4)] px-5 py-3 text-[var(--danger)] outline-none transition hover:bg-[rgba(var(--danger-rgb),0.1)] focus-visible:border-[var(--danger)]"
+              >
+                Reset Conference
+              </button>
+
+            </div>
+
+          </div>
+          
+          {/* Allocation Parser */}
+
+          <div className="border border-[var(--app-border)] bg-[var(--app-panel)] p-6 lg:col-span-2">
+
+            <h2 className="text-xl font-semibold">
+              Allocation Parser
+            </h2>
+
+            <p className="mt-2 text-sm text-[var(--app-text-muted)]">
+              Raw output of AllocationParser, shown alongside ConferenceService's
+              own parse above for comparison.
+            </p>
+
+            <div className="mt-6 space-y-6">
+
+              {parsedCommittees.map((committee) => (
+
+                <div
+                  key={committee.id}
+                  className="border border-[var(--app-border)] p-4"
+                >
+
+                  <h3 className="font-semibold">
+                    {committee.id}
+                    {committee.title ? `: ${committee.title}` : ""}
+                  </h3>
+
+                  <p className="mt-1 text-sm text-[var(--app-text-muted)]">
+                    {committee.topic || "(no topic)"}
+                  </p>
+
+                  <p className="mt-2 text-sm text-[var(--app-text-muted)]">
+                    {committee.chairs.length} chairs ·{" "}
+                    {committee.delegates.length} delegates ·{" "}
+                    {committee.pages.length} pages
+                  </p>
+
+                  <div className="mt-4 overflow-x-auto">
+
+                    <table className="border-collapse text-sm">
+
+                      <thead>
+
+                        <tr>
+                          <th className="border border-[var(--app-border)] px-2 py-1 text-left">Role</th>
+                          <th className="border border-[var(--app-border)] px-2 py-1 text-left">Delegation</th>
+                          <th className="border border-[var(--app-border)] px-2 py-1 text-left">Code</th>
+                          <th className="border border-[var(--app-border)] px-2 py-1 text-left">Name</th>
+                          <th className="border border-[var(--app-border)] px-2 py-1 text-left">School</th>
+                          <th className="border border-[var(--app-border)] px-2 py-1 text-left">Stance</th>
+                        </tr>
+
+                      </thead>
+
+                      <tbody>
+
+                        {[...committee.chairs, ...committee.delegates, ...committee.pages].map((person, index) => (
+
+                          <tr key={index}>
+                            <td className="border border-[var(--app-border)] px-2 py-1">{person.role || ""}</td>
+                            <td className="border border-[var(--app-border)] px-2 py-1">
+                              <span className="inline-flex items-center gap-2">
+                                <Flag countryCode={person.countryCode} />
+                                {person.countryDisplay || ""}
+                              </span>
+                            </td>
+                            <td className="border border-[var(--app-border)] px-2 py-1">{person.countryCode || ""}</td>
+                            <td className="border border-[var(--app-border)] px-2 py-1">{person.name || ""}</td>
+                            <td className="border border-[var(--app-border)] px-2 py-1">{person.school || ""}</td>
+                            <td className="border border-[var(--app-border)] px-2 py-1">{person.stance || ""}</td>
+                          </tr>
+
+                        ))}
+
+                      </tbody>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+              ))}
+
+            </div>
+
+          </div>
+
+          {/* Motion Input */}
+
+          <div className="border border-[var(--app-border)] bg-[var(--app-panel)] p-6 lg:col-span-2">
+
+            <h2 className="text-xl font-semibold">
+              Motion Input
+            </h2>
+
+            <p className="mt-2 text-sm text-[var(--app-text-muted)]">
+              Type a motion below to see MOTIONS/delegation highlighting live, and drag the
+              slider to adjust how many typos a fuzzy match will tolerate. Delegation matching
+              is scoped to the loaded committee's {delegates.length} delegations.
+            </p>
+
+            <div className="mt-6">
+              <div className="flex items-center justify-between text-sm text-[var(--app-text-muted)]">
+                <label htmlFor="fuzzy-level">Fuzzy match level</label>
+                <span>{Math.round(fuzzyLevel * 100)}%{fuzzyLevel === 0 ? " (off)" : ""}</span>
+              </div>
+
+              <input
+                id="fuzzy-level"
+                type="range"
+                min="0"
+                max="0.4"
+                step="0.01"
+                value={fuzzyLevel}
+                onChange={(e) => setFuzzyLevel(Number(e.target.value))}
+                className="mt-2 w-full"
+              />
+            </div>
+
+            <MotionInput
+              value={motionText}
+              onChange={setMotionText}
+              placeholder="Try a typo, like 'Frnace moves to Open a Moderatd Caucus'…"
+              rows={6}
+              fuzzyLevel={fuzzyLevel}
+              className="mt-6"
+              delegations={delegations}
+              onSubmit={(meta) => setMotionLog((prev) => [meta, ...prev])}
+            />
+
+            <MotionLog
+              entries={motionLog}
+              onDelete={(index) => setMotionLog((prev) => prev.filter((_, i) => i !== index))}
+            />
+
+          </div>
+
+          {/* Live JSON */}
+
+          <div className="border border-[var(--app-border)] bg-[var(--app-panel)] p-6 lg:col-span-2">
+
+            <h2 className="text-xl font-semibold">
+              Conference Object
+            </h2>
+
+            <pre className="mt-4 max-h-[400px] overflow-auto border border-[var(--app-border)] bg-[var(--app-input)] p-3 text-xs">
+              {JSON.stringify(conference, null, 2)}
+            </pre>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  );
+}

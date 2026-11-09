@@ -1,0 +1,153 @@
+/* Company identity colors - single source of truth. Reference these via
+   var() everywhere instead of hardcoding hex/rgba. */
+
+:root {
+  --color-page-light: #f4f4f0;
+  --color-surface-dark: #111111;
+
+  /* Base surface/border/text tokens, Black's values. Every app theme (White,
+     Brown) is just a block of overrides for these below - no filters. These
+     defaults are the exact literal colors that used to be hardcoded
+     per-component as Tailwind arbitrary values (e.g. `bg-[#0d0d0d]`,
+     `border-white/10`), so Black stays pixel-identical.
+
+     Defined on :root, not `.app-shell`, because LandingPage's live demos
+     mount real app components (Queue, Timer, VotingPanel) *outside* the
+     .app-shell scope - scoping these there left every one of them with a
+     transparent background and invisible white text. */
+  --app-bg: #0d0d0d;
+  --app-panel: #111111;
+  --app-input: #181818;
+  --app-hover: #1b1b1b;
+  --app-overlay: rgba(0, 0, 0, 0.7);
+  --app-border: rgba(255, 255, 255, 0.1);
+  --app-border-hover: rgba(255, 255, 255, 0.2);
+  --app-border-focus: rgba(255, 255, 255, 0.3);
+  --app-border-active: rgba(255, 255, 255, 0.4);
+  --app-border-faint: rgba(255, 255, 255, 0.05);
+  --app-text: #ffffff;
+  --app-text-secondary: rgba(255, 255, 255, 0.75);
+  --app-text-muted: rgba(255, 255, 255, 0.45);
+  --app-text-faint: rgba(255, 255, 255, 0.3);
+  --app-chip: rgba(255, 255, 255, 0.05);
+  --app-chip-active: rgba(255, 255, 255, 0.1);
+  --app-chip-active-hover: rgba(255, 255, 255, 0.2);
+  --app-toggle-on: rgba(255, 255, 255, 0.3);
+  --app-cta-bg: #ffffff;
+  --app-cta-hover: rgba(255, 255, 255, 0.9);
+  --app-cta-text: #000000;
+  /* Timer ring's unfilled track, and the knob on toggle switches. */
+  --timer-track: #2a2a2a;
+  --app-knob: #ffffff;
+}
+
+.theme-shell {
+  --accent: #9a5b3a;
+  --accent-rgb: 154, 91, 58;
+}
+
+.theme-shell.theme-dark {
+  --accent: #65a4c5;
+  --accent-rgb: 101, 164, 197;
+}
+
+/* App shell (Home/Session/Debug/Motion/Settings) - any page opts in by adding
+   `.app-shell` to its root element. One system for every theme: Black is the
+   defaults (here and on :root), and White/Brown below only override tokens.
+   Accents are the same real colors in every theme, so they're defined once
+   here and never overridden. Kept separate from LandingPage's own
+   .theme-shell/.theme-dark above, which still uses an invert filter. */
+.app-shell {
+  /* Timer ring's "remaining" color. */
+  --timer-remaining: #b7774d;
+  /* Brand brown. */
+  --accent: #9a5b3a;
+  /* Second accent (e.g. MotionInput's country highlight). */
+  --accent-alt: #4caf7d;
+  /* Third accent (MotionInput's per-speaker "speaking time" highlight). */
+  --accent-time: #a37fd1;
+  /* Fourth accent (MotionInput's total-duration highlight). */
+  --accent-duration: #d4a24c;
+  /* Fifth accent (MotionInput's topic highlight). */
+  --accent-topic: #4a90e2;
+  /* Vote group colors (MotionPage's SeatChart groups). */
+  --vote-for: #3987e5;
+  --vote-against: #c98500;
+  --vote-abstain: #7a7a7a;
+  /* "Motion in progress" accent (SessionBoard's nav dot, MotionPage's vote
+     status labels). */
+  --motion-accent: #fbbf24;
+  --motion-accent-rgb: 251, 191, 36;
+  /* Destructive/danger red (delete buttons, error banners). */
+  --danger: #ef4444;
+  --danger-rgb: 239, 68, 68;
+}
+
+/* White - Black's surface/border/text tokens mirrored (each value is the
+   exact inverse of Black's), so it looks the same as the invert filter it
+   replaced, minus the side effects (flags, QR codes and photos no longer
+   flip). */
+html[data-app-theme="light"] .app-shell {
+  --app-bg: #f2f2f2;
+  --app-panel: #eeeeee;
+  --app-input: #e7e7e7;
+  --app-hover: #e4e4e4;
+  --app-overlay: rgba(255, 255, 255, 0.7);
+  --app-border: rgba(0, 0, 0, 0.1);
+  --app-border-hover: rgba(0, 0, 0, 0.2);
+  --app-border-focus: rgba(0, 0, 0, 0.3);
+  --app-border-active: rgba(0, 0, 0, 0.4);
+  --app-border-faint: rgba(0, 0, 0, 0.05);
+  --app-text: #000000;
+  --app-text-secondary: rgba(0, 0, 0, 0.75);
+  --app-text-muted: rgba(0, 0, 0, 0.45);
+  --app-text-faint: rgba(0, 0, 0, 0.3);
+  --app-chip: rgba(0, 0, 0, 0.05);
+  --app-chip-active: rgba(0, 0, 0, 0.1);
+  --app-chip-active-hover: rgba(0, 0, 0, 0.2);
+  --app-toggle-on: rgba(0, 0, 0, 0.3);
+  --app-cta-bg: #000000;
+  --app-cta-hover: rgba(0, 0, 0, 0.9);
+  --app-cta-text: #ffffff;
+  --timer-track: #d5d5d5;
+  --app-knob: #000000;
+}
+
+/* Brown - same mechanism as White: token overrides only, accents inherited. */
+html[data-app-theme="brown"] .app-shell {
+  --app-bg: #17110a;
+  --app-panel: #221a12;
+  --app-input: #2c2015;
+  --app-hover: #332415;
+  --app-overlay: rgba(15, 10, 5, 0.75);
+  --app-border: rgba(214, 180, 150, 0.14);
+  --app-border-hover: rgba(214, 180, 150, 0.24);
+  --app-border-focus: rgba(214, 180, 150, 0.34);
+  --app-border-active: rgba(214, 180, 150, 0.44);
+  --app-border-faint: rgba(214, 180, 150, 0.07);
+  --app-text: #f3e9dc;
+  --app-text-secondary: rgba(243, 233, 220, 0.78);
+  --app-text-muted: rgba(243, 233, 220, 0.48);
+  --app-text-faint: rgba(243, 233, 220, 0.32);
+  --app-chip: rgba(214, 180, 150, 0.07);
+  --app-chip-active: rgba(214, 180, 150, 0.14);
+  --app-chip-active-hover: rgba(214, 180, 150, 0.24);
+  --app-toggle-on: rgba(201, 148, 106, 0.4);
+  --app-cta-bg: #9a5b3a;
+  --app-cta-hover: #b56f47;
+  --app-cta-text: #f3e9dc;
+}
+
+/* [data-motion-exempt] carves out the reduced-motion toggle's own knob:
+   setAppReducedMotion() sets the data-app-reduced-motion attribute
+   synchronously, before React re-renders the knob's new position, so without
+   this exemption the very click that turns reduced motion ON would have its
+   own feedback animation suppressed (snapping instantly) while turning it
+   OFF would still animate smoothly (re-enabling transitions just in time) -
+   an inconsistent, confusing result for the one control whose job is to show
+   you it registered the click. */
+html[data-app-reduced-motion="true"] .app-shell,
+html[data-app-reduced-motion="true"] .app-shell *:not([data-motion-exempt]) {
+  transition: none !important;
+  animation: none !important;
+}
