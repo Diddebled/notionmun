@@ -6,6 +6,7 @@ import Queue from "../components/Queue";
 import { formatTime } from "../utils/formatTime";
 import LiveSessionService from "../services/LiveSessionService";
 import { useAnchoredCountdown } from "../hooks/useAnchoredCountdown";
+import { isFirebaseConfigured } from "../firebase";
 
 // Anchored on the chair's published `timer.anchorAt` (a Firestore
 // serverTimestamp, not the chair's own clock) so a wrong laptop clock can't
@@ -50,17 +51,22 @@ export default function DelegateSessionPage() {
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
+    setState(null);
     setFailed(false);
-    return LiveSessionService.subscribe(sessionId, setState, () => setFailed(true));
+    let current = true;
+    const unsubscribe = LiveSessionService.subscribe(sessionId, (value) => { if (current) setState(value); }, () => { if (current) setFailed(true); });
+    return () => { current = false; unsubscribe(); };
   }, [sessionId]);
 
   if (!state) {
     return (
       <div className="app-shell flex min-h-screen items-center justify-center bg-[var(--app-bg)] p-6 text-center text-[var(--app-text-muted)]">
-        {failed ? "Couldn't reach this session. Check the link and reload." : <>Waiting for the chair to go live&hellip;</>}
+        {!isFirebaseConfigured() ? "Cloud live sessions are not configured on this site. For an offline room display, open Presenter on the chair's device." : failed ? "Couldn't reach this session. Check the link and reload." : <>Waiting for the chair to go live&hellip;</>}
       </div>
     );
   }
+
+  if (state.active === false) return <div className="app-shell desk-offline-message"><h1>Broadcast stopped</h1><p>The chair has ended this live broadcast.</p></div>;
 
   return (
     <div className="app-shell min-h-screen bg-[var(--app-bg)] p-5 text-[var(--app-text)] sm:p-8">

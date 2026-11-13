@@ -7,7 +7,7 @@ vi.mock("firebase/firestore", () => ({
   onSnapshot: vi.fn(),
   serverTimestamp: () => "server-time",
 }));
-vi.mock("../firebase", () => ({ getFirebaseDb: () => ({}) }));
+vi.mock("../firebase", () => ({ getFirebaseDb: () => ({}), isFirebaseConfigured: () => true }));
 
 const { default: LiveSessionService } = await import("./LiveSessionService");
 
@@ -17,6 +17,10 @@ afterEach(() => {
 });
 
 describe("LiveSessionService.publish", () => {
+  it("stops the broadcast with a replacement write that removes old public state", async () => {
+    setDoc.mockResolvedValue(); await expect(LiveSessionService.stop("abc")).resolves.toBe(true);
+    expect(setDoc).toHaveBeenCalledWith("sessions/abc/live/state", { active: false, updatedAt: "server-time" });
+  });
   it("writes the patch to the session's live doc", async () => {
     setDoc.mockResolvedValue();
     await expect(LiveSessionService.publish("abc", { activeMotionLabel: "Moderated Caucus" })).resolves.toBe(true);

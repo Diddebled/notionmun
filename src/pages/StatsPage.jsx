@@ -5,6 +5,8 @@ import ConferenceService from "../services/ConferenceService";
 import Papa from "papaparse";
 import { Download } from "lucide-react";
 import { downloadFile } from "../services/workspace";
+import ReportExtras from "../components/ReportExtras";
+import useWorkspace from "../hooks/useWorkspace";
 
 function formatDuration(totalSeconds) {
   const seconds = Math.round(totalSeconds);
@@ -23,6 +25,7 @@ function StatCard({ label, value }) {
 }
 
 export default function StatsPage() {
+  useWorkspace();
   const committee = ConferenceService.getActiveCommittee();
 
   if (!committee) return <NoCommitteeModal />;
@@ -84,6 +87,7 @@ export default function StatsPage() {
             <p className="mt-3 text-sm text-[var(--app-text-muted)]">No speeches recorded yet.</p>
           )}
         </div>
+        <ReportExtras />
       </div>
     </div>
   );

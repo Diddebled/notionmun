@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, QrCode, Trash2 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
@@ -9,6 +9,8 @@ import CloudSessionService, { stableDelegateKey, dayNumberForSession } from "../
 import ConferenceService from "../services/ConferenceService";
 import LiveSessionService from "../services/LiveSessionService";
 import { appUrl } from "../utils/siteUrl";
+import { linkCloudAttendance } from "../hooks/useCloudAttendance";
+import { saveRecovery } from "../services/desk";
 
 const PILL = "border border-[var(--app-border)] bg-[var(--app-chip)] px-3 py-2 text-xs uppercase tracking-[0.18em] text-[var(--app-text-secondary)] transition hover:bg-[var(--app-chip-active)]";
 const PILL_ACTIVE = "border border-[var(--app-border-active)] bg-[var(--app-chip-active)] px-3 py-2 text-xs uppercase tracking-[0.18em] text-[var(--app-text)] transition";
@@ -42,6 +44,10 @@ export default function CloudSessionsPage() {
   const [newCollaboratorUid, setNewCollaboratorUid] = useState("");
   const [pendingDeleteSessionId, setPendingDeleteSessionId] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [changingBroadcast, setChangingBroadcast] = useState(false);
+  const broadcastBusy = useRef(false);
+  const attendanceOperations = useRef(new Map());
+  const activeRef = useRef(activeSessionId); activeRef.current = activeSessionId;
 
   useEffect(() => AuthService.subscribe(setUser), []);
 
@@ -50,28 +56,24 @@ export default function CloudSessionsPage() {
     AuthService.consumeQuickLoginParams().catch((err) => setError(err.message));
   }, []);
 
-  // Panels that read `sessions`/`attendance` are only rendered while
-  // `user`/`activeSessionId` are truthy (see JSX below), so stale data left
-  // behind after logout/deselect never actually surfaces - no need to reset
-  // it here, only to fetch when there's something to fetch.
   useEffect(() => {
-    if (!user) return;
-    CloudSessionService.listMySessions(user.uid).then(setSessions).catch((err) => setError(err.message));
-  }, [user]);
+    setSessions([]); setActiveSessionId(null); setQuickLoginUrl(null);
+    if (!user) return undefined;
+    let current = true;
+    CloudSessionService.listMySessions(user.uid).then((items) => { if (current) setSessions(items); }).catch((err) => { if (current) setError(err.message); });
+    return () => { current = false; };
+  }, [user?.uid]);
 
   // Cleared on every switch and guarded against late replies, so a slow
   // fetch for the previous session can't show (or be edited as) this one's.
   useEffect(() => {
     setAttendance({});
     if (!activeSessionId) return undefined;
-    let cancelled = false;
-    CloudSessionService.listAttendance(activeSessionId)
-      .then((next) => !cancelled && setAttendance(next))
-      .catch((err) => !cancelled && setError(err.message));
-    return () => {
-      cancelled = true;
-    };
-  }, [activeSessionId]);
+    if (!user) return undefined;
+    let current = true;
+    const unsubscribe = CloudSessionService.subscribeAttendance(activeSessionId, (value) => { if (current) setAttendance(value); }, (err) => { if (current) { setAttendance({}); setError(err.message); } });
+    return () => { current = false; unsubscribe(); };
+  }, [activeSessionId, user?.uid]);
 
   async function handleGoogleSignIn() {
     try {
@@ -125,10 +127,14 @@ export default function CloudSessionsPage() {
   async function handleCycleAttendance(delegateKey) {
     if (!activeSessionId || !user) return;
     const next = nextAttendanceState(attendance[delegateKey]);
+    const target = activeSessionId; const operation = Symbol();
+    attendanceOperations.current.set(`${target}:${delegateKey}`, operation);
     setAttendance((prev) => ({ ...prev, [delegateKey]: next }));
     try {
       await CloudSessionService.setAttendance(activeSessionId, delegateKey, next);
     } catch (err) {
+      if (activeRef.current !== target || attendanceOperations.current.get(`${target}:${delegateKey}`) !== operation) return;
+      setAttendance((prev) => ({ ...prev, [delegateKey]: attendance[delegateKey] }));
       setError(err.message);
     }
   }
@@ -159,10 +165,19 @@ export default function CloudSessionsPage() {
   // Flips SessionBoard/MotionPage's publish gate for this tab - not scoped
   // to activeSessionId's owner, so a co-chair sitting at the dais can go
   // live too, same as attendance's read/write access.
-  function handleToggleLive() {
+  async function handleToggleLive() {
+    if (broadcastBusy.current || !activeSessionId) return;
+    broadcastBusy.current = true; setChangingBroadcast(true); setError(null);
     const next = liveSessionId === activeSessionId ? null : activeSessionId;
-    LiveSessionService.setActiveSessionId(next);
-    setLiveSessionId(next);
+    try {
+      if (liveSessionId && liveSessionId !== next) {
+        if (!(await LiveSessionService.stop(liveSessionId))) throw new Error("Could not stop the previous public broadcast. Check your connection and try again.");
+        LiveSessionService.setActiveSessionId(null); setLiveSessionId(null);
+      }
+      if (next && !(await LiveSessionService.publish(next, { active: true }))) throw new Error("Could not start broadcasting. Check your connection and try again.");
+      LiveSessionService.setActiveSessionId(next); setLiveSessionId(next);
+    } catch (err) { setError(err.message); }
+    finally { broadcastBusy.current = false; setChangingBroadcast(false); }
   }
 
   async function handleAddCollaborator() {
@@ -356,6 +371,7 @@ export default function CloudSessionsPage() {
             {activeSessionId && (
               <div className={`mt-6 ${PANEL}`}>
                 <p className={LABEL}>Delegate View</p>
+                <button className="quiet-button mt-3" onClick={() => { if (!ConferenceService.getActiveCommittee() || !window.confirm("Use this shared session's attendance for the current local committee? Remote attendance will replace local attendance; a recovery point is saved first.")) return; try { saveRecovery("Before connecting shared attendance"); linkCloudAttendance(activeSessionId, ConferenceService.getActiveCommitteeId(), user.uid); setError(null); window.location.href = appUrl("/rollcall"); } catch (err) { setError(err.message); } }}>Connect shared attendance to this committee</button>
                 <p className="mt-2 text-sm text-[var(--app-text-muted)]">
                   Delegates scan this to see the live speaker queue, timer, and current motion on
                   their own devices &mdash; no login needed.
@@ -363,6 +379,7 @@ export default function CloudSessionsPage() {
 
                 <button
                   onClick={handleToggleLive}
+                  disabled={changingBroadcast}
                   className={`mt-4 ${liveSessionId === activeSessionId ? PILL_ACTIVE : PILL}`}
                 >
                   {liveSessionId === activeSessionId ? "Stop Broadcasting" : "Go Live"}

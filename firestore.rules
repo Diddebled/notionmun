@@ -40,7 +40,7 @@ service cloud.firestore {
       // mirror of currentSpeaker/queue/timer/activeMotion only. No login on
       // that subdomain, so read must be open; writes stay chair-only.
       match /live/{docId} {
-        allow read: if true;
+        allow read: if exists(/databases/$(database)/documents/sessions/$(sessionId));
         allow write: if isSessionMember(sessionId);
       }
     }

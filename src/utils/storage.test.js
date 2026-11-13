@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { local, session } from "./storage";
+import { dais, local, session } from "./storage";
 import { memoryStorage } from "../testUtils/memoryStorage";
 
 function throwingStorage() {
@@ -40,5 +40,13 @@ describe("storage", () => {
     sessionStorage.setItem("vote", "{not json");
     expect(session.getJSON("vote")).toBe(null);
     expect(session.getJSON("missing")).toBe(null);
+  });
+  it("prefers durable values across tabs, but retains newer temporary values if the durable write fails", () => {
+    const durable = memoryStorage(); const temporary = memoryStorage();
+    vi.stubGlobal("localStorage", durable); vi.stubGlobal("sessionStorage", temporary);
+    durable.setItem("queue", "new in another tab"); temporary.setItem("queue", "older"); expect(dais.get("queue")).toBe("new in another tab");
+    vi.spyOn(durable, "setItem").mockImplementation(() => { throw new Error("Full"); });
+    expect(dais.set("queue", "latest in this tab")).toBe(true); expect(dais.get("queue")).toBe("latest in this tab"); expect(session.get("_notionmun-newer-session:queue")).toBe("1");
+    vi.restoreAllMocks(); dais.set("queue", "durable again"); expect(session.get("_notionmun-newer-session:queue")).toBeNull(); expect(durable.getItem("queue")).toBe("durable again");
   });
 });

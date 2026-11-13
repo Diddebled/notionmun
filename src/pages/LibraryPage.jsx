@@ -1,0 +1,22 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Download, FolderOpen, History, Save, Trash2 } from "lucide-react";
+import DeskPage, { DeskNotice } from "../components/DeskPage";
+import ConferenceService from "../services/ConferenceService";
+import { deleteWorkspace, openWorkspace, recoverySnapshots, restoreRecovery, saveRecovery, saveWorkspace, workspaceLibrary } from "../services/desk";
+import { downloadFile } from "../services/workspace";
+import useWorkspace from "../hooks/useWorkspace";
+
+export default function LibraryPage() {
+  const { refresh } = useWorkspace(); const navigate = useNavigate();
+  const [label, setLabel] = useState(ConferenceService.getConferenceName());
+  const [error, setError] = useState(""); const [message, setMessage] = useState("");
+  const run = (fn, text) => { try { fn(); setError(""); setMessage(text); refresh(); } catch (e) { setError(e.message); } };
+  const libraries = workspaceLibrary(); const recovery = recoverySnapshots();
+  return <DeskPage title="Workspace library" description="Keep separate conferences on this device, download backups, and recover an earlier version.">
+    <DeskNotice error={error} message={message} />
+    <section className="desk-card"><h2>Save the current workspace</h2><form className="desk-filter-row" onSubmit={(e) => { e.preventDefault(); run(() => saveWorkspace(label), "Workspace saved. Saving again updates this library entry."); }}><input aria-label="Workspace label" required maxLength={160} value={label} onChange={(e) => setLabel(e.target.value)} /><button className="primary-button"><Save size={16} />Save workspace</button><button type="button" className="quiet-button" onClick={() => run(() => saveRecovery("Manual recovery point"), "Recovery point saved.")}><History size={16} />Create recovery point</button></form><p className="desk-hint">Saved workspaces include all committees, votes, resolutions, schedules, chair notes and preferences. Download a file before clearing browser data.</p></section>
+    <section><h2 className="desk-section-title">Saved conferences <span className="desk-count">{libraries.length}</span></h2><div className="desk-library-grid">{libraries.map((item) => <article className="desk-card" key={item.id}><FolderOpen className="desk-accent-icon" size={24} /><h3>{item.label}</h3><p className="desk-hint">{Object.keys(item.backup.conference.committees).length} committees · {new Date(item.at).toLocaleString()}</p><div className="desk-actions"><button className="primary-button" onClick={() => { if (window.confirm(`Open ${item.label}? The current workspace will get a recovery point.`)) run(() => { openWorkspace(item.id); navigate("/"); }, "Workspace opened."); }}>Open</button><button className="quiet-button" onClick={() => downloadFile("notionmun-workspace.json", JSON.stringify(item.backup, null, 2))}><Download size={15} />Download</button><button className="icon-button" aria-label={`Delete saved ${item.label}`} onClick={() => { if (window.confirm(`Delete the saved library entry ${item.label}? The active workspace will remain.`)) run(() => deleteWorkspace(item.id), "Saved entry removed."); }}><Trash2 size={16} /></button></div></article>)}</div>{!libraries.length && <p className="desk-empty">Your saved conferences will appear here.</p>}</section>
+    <section className="desk-card"><div className="section-heading"><h2>Recovery history</h2><span className="desk-badge">Last 8 snapshots</span></div><p className="desk-hint">Recovery points are created after edits and before major changes. They stay on this device.</p><div className="desk-history-list">{recovery.map((item) => <article key={item.id}><div><strong>{item.label}</strong><p>{item.backup.conference.name} · {new Date(item.at).toLocaleString()}</p></div><div className="desk-actions"><button className="quiet-button" onClick={() => { if (window.confirm(`Restore this recovery point from ${new Date(item.at).toLocaleString()}? A copy of the current work will be saved first.`)) run(() => { restoreRecovery(item.id); navigate("/"); }, "Recovery point restored."); }}>Restore</button><button className="icon-button" aria-label={`Download recovery ${item.at}`} onClick={() => downloadFile("notionmun-recovery.json", JSON.stringify(item.backup, null, 2))}><Download size={16} /></button></div></article>)}</div>{!recovery.length && <p className="desk-empty">No recovery points yet. Create one above.</p>}</section>
+  </DeskPage>;
+}

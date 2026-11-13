@@ -6,7 +6,7 @@ import JSZip from "jszip";
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const OUTPUT = "notionmun-source.zip";
 const DIRECTORIES = ["src", "public", "scripts", "licenses", "legacy", "tests"];
-const FILES = ["LICENSE", "README.md", "MODIFICATIONS.md", "package.json", "package-lock.json", "index.html", "vite.config.js", "postcss.config.js", "vercel.json", "main.py", "test_server.py", "firebase.json", "firestore.rules"];
+const FILES = ["LICENSE", "README.md", "MODIFICATIONS.md", "FEATURES.md", "package.json", "package-lock.json", "index.html", "vite.config.js", "postcss.config.js", "vercel.json", "main.py", "test_server.py", "firebase.json", "firestore.rules"];
 const OPTIONAL_FILES = [".gitignore", ".vercelignore", ".github/workflows/deploy.yml"];
 
 function safeToInclude(name) {

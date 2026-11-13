@@ -1,6 +1,6 @@
 import { doc, setDoc, onSnapshot, serverTimestamp } from "firebase/firestore";
 
-import { getFirebaseDb } from "../firebase";
+import { getFirebaseDb, isFirebaseConfigured } from "../firebase";
 
 const ACTIVE_SESSION_KEY = "motion-live-session-id";
 
@@ -54,10 +54,19 @@ class LiveSessionService {
     });
   }
 
+  async stop(sessionId) {
+    try {
+      await setDoc(doc(getFirebaseDb(), "sessions", sessionId, "live", "state"), { active: false, updatedAt: serverTimestamp() });
+      this.setActiveSessionId(null);
+      return true;
+    } catch { return false; }
+  }
+
   // First onSnapshot usage in the app - returns Firestore's own unsubscribe.
   // The error handler keeps a terminal listener error (e.g. a bad session id)
   // from surfacing as an uncaught exception; Firestore retries network drops itself.
   subscribe(sessionId, callback, onError = () => {}) {
+    if (!isFirebaseConfigured()) { onError(new Error("Cloud live sessions are not configured for this site.")); return () => {}; }
     const db = getFirebaseDb();
     return onSnapshot(
       doc(db, "sessions", sessionId, "live", "state"),

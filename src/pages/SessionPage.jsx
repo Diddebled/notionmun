@@ -55,11 +55,11 @@ export default function SessionPage() {
   // The nav pill/badge just needs the motion type ("Moderated Caucus"), not
   // the full formatted sentence (that's what MotionPage's voting panel shows).
   const motion = ConferenceService.getActiveMotion();
-  const activeMotion = motion?.motion ?? "No motion active";
+  const activeMotion = motion?.motion ?? "General Speakers List";
 
   // A passed motion's speaking time drives the timer, falling back to its
   // total time and then SessionBoard's default.
-  const speechLength = toWholeSeconds(motion?.speakingTime) ?? toWholeSeconds(motion?.totalTime) ?? undefined;
+  const speechLength = toWholeSeconds(motion?.speakingTime) ?? toWholeSeconds(motion?.totalTime) ?? 90;
 
   // A fresh seed from MotionPage (a new speakers' list or a passed motion's
   // mover) replaces the saved queue; otherwise the saved one comes back, so

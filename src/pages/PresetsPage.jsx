@@ -1,0 +1,15 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Layers, Plus, Save, Trash2 } from "lucide-react";
+import DeskPage, { DeskNotice } from "../components/DeskPage";
+import { applyCommitteePreset, committeePresets, removeCommitteePreset, saveCommitteePreset } from "../committeePresets";
+import useWorkspace from "../hooks/useWorkspace";
+
+export default function PresetsPage() {
+  const { refresh } = useWorkspace(); const navigate = useNavigate(); const [name, setName] = useState(""); const [error, setError] = useState(""); const [message, setMessage] = useState("");
+  const apply = (preset, create) => { if (!create && !window.confirm(`Apply ${preset.name} settings to the current committee? Its roster and existing records will stay; a recovery point will be saved.`)) return; try { applyCommitteePreset(preset.id, create); navigate("/organizer"); } catch (e) { setError(e.message); } };
+  return <DeskPage title="Committee presets" description="Start with a committee template, then adapt its agenda and procedure to your conference."><DeskNotice error={error} message={message} /><p className="notice">These are editable starting templates. Confirm speech lengths, quorum and voting rules against your conference's rules of procedure.</p>
+    <div className="desk-library-grid">{committeePresets().map((preset) => <article className="desk-card" key={preset.id}><Layers size={24} className="desk-accent-icon" /><div className="desk-inline-heading"><h2>{preset.name}</h2>{preset.custom && <span className="desk-badge">Custom</span>}</div><p className="desk-hint">{preset.description}</p><dl className="desk-preset-facts"><div><dt>Speech length</dt><dd>{preset.speechSeconds}s</dd></div><div><dt>Quorum</dt><dd>{preset.quorumPercent}%</dd></div><div><dt>Agenda</dt><dd>{preset.topic}</dd></div></dl><div className="desk-actions"><button className="primary-button" onClick={() => apply(preset, true)}><Plus size={15} />Create committee</button><button className="quiet-button" onClick={() => apply(preset, false)}>Apply settings</button>{preset.custom && <button className="icon-button" aria-label={`Delete template ${preset.name}`} onClick={() => { if (window.confirm("Delete this saved template?")) { removeCommitteePreset(preset.id); refresh(); } }}><Trash2 size={15} /></button>}</div></article>)}</div>
+    <section className="desk-card"><h2>Save your own template</h2><p className="desk-hint">Copies the current agenda, speech length, decision rule, quorum and delegation names. Personal contact details, attendance and speaking history start fresh when you create a committee.</p><form className="desk-filter-row" onSubmit={(e) => { e.preventDefault(); try { saveCommitteePreset(name); setName(""); setMessage("Committee template saved."); setError(""); refresh(); } catch (err) { setError(err.message); } }}><input required aria-label="Template name" placeholder="My conference committee setup" maxLength={160} value={name} onChange={(e) => setName(e.target.value)} /><button className="primary-button"><Save size={15} />Save template</button></form></section>
+  </DeskPage>;
+}

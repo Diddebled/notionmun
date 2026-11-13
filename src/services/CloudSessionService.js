@@ -12,6 +12,8 @@ import {
   writeBatch,
   arrayUnion,
   arrayRemove,
+  deleteDoc,
+  onSnapshot,
 } from "firebase/firestore";
 
 import { getFirebaseDb } from "../firebase";
@@ -59,6 +61,20 @@ export function dayNumberForSession(session) {
 // with it.
 const DAY_MARKER_ID = "_dayMarker";
 
+async function deleteInChunks(db, references) {
+  for (let at = 0; at < references.length; at += 450) {
+    const batch = writeBatch(db);
+    references.slice(at, at + 450).forEach((ref) => batch.delete(ref));
+    await batch.commit();
+  }
+}
+
+export function attendanceForDay(documents, currentDay) {
+  const marker = documents.find((item) => item.id === DAY_MARKER_ID)?.data()?.day ?? 1;
+  return Object.fromEntries(documents.filter((item) => item.id !== DAY_MARKER_ID && (currentDay == null || (item.data().day ?? marker) === currentDay))
+    .map((item) => [item.id, item.data().status]));
+}
+
 class CloudSessionService {
   // Starts as just [ownerId]; collaborators are appended via addCollaborator.
   // firestore.rules keys every access check off this one list, so an owner is
@@ -86,10 +102,9 @@ class CloudSessionService {
   async deleteSession(sessionId) {
     const db = getFirebaseDb();
     const attendanceSnap = await getDocs(collection(db, "sessions", sessionId, "attendance"));
-    const batch = writeBatch(db);
-    attendanceSnap.docs.forEach((docSnap) => batch.delete(docSnap.ref));
-    batch.delete(doc(db, "sessions", sessionId));
-    await batch.commit();
+    await deleteDoc(doc(db, "sessions", sessionId, "live", "state"));
+    await deleteInChunks(db, attendanceSnap.docs.map((snapshot) => snapshot.ref));
+    await deleteDoc(doc(db, "sessions", sessionId));
   }
 
   // Sorts client-side by createdAt instead of an orderBy+where composite
@@ -113,14 +128,34 @@ class CloudSessionService {
 
   async setAttendance(sessionId, delegateKey, status) {
     const db = getFirebaseDb();
+    const parent = await getDoc(doc(db, "sessions", sessionId));
+    const day = dayNumberForSession(parent.exists() ? parent.data() : null) ?? 1;
     const ref = doc(db, "sessions", sessionId, "attendance", delegateKey);
-    await setDoc(ref, { status }, { merge: true });
+    await setDoc(ref, { status, day }, { merge: true });
   }
 
-  // Yesterday's attendance is cleared rather than carried forward. The day
-  // marker is a doc inside the attendance collection, not a field on the
-  // session, since only the owner may update the session doc but any
-  // collaborator needs to trigger this reset.
+  async setAttendanceBatch(sessionId, entries) {
+    const db = getFirebaseDb();
+    const parent = await getDoc(doc(db, "sessions", sessionId));
+    const day = dayNumberForSession(parent.exists() ? parent.data() : null) ?? 1;
+    for (let at = 0; at < entries.length; at += 450) {
+      const batch = writeBatch(db);
+      entries.slice(at, at + 450).forEach(({ key, status }) => batch.set(doc(db, "sessions", sessionId, "attendance", key), { status, day }, { merge: true }));
+      await batch.commit();
+    }
+  }
+
+  subscribeAttendance(sessionId, callback, onError = () => {}) {
+    const db = getFirebaseDb(); let stopped = false; let documents = null; let parent = null;
+    const emit = () => { if (!stopped && documents && parent) callback(attendanceForDay(documents, dayNumberForSession(parent))); };
+    getDoc(doc(db, "sessions", sessionId)).then((snapshot) => { if (stopped) return; if (!snapshot.exists()) throw new Error("This cloud session no longer exists."); parent = snapshot.data(); emit(); }).catch((error) => { if (!stopped) onError(error); });
+    const unsubscribe = onSnapshot(collection(db, "sessions", sessionId, "attendance"), (snapshot) => { documents = snapshot.docs; emit(); }, onError);
+    const timer = setInterval(emit, 60000);
+    return () => { stopped = true; unsubscribe(); clearInterval(timer); };
+  }
+
+  // Previous days remain stored but are not carried into today's roll call.
+  // Reading never deletes a different chair's in-flight attendance write.
   async listAttendance(sessionId) {
     const db = getFirebaseDb();
     const attendanceCol = collection(db, "sessions", sessionId, "attendance");
@@ -130,23 +165,8 @@ class CloudSessionService {
     const session = sessionSnap.exists() ? { id: sessionSnap.id, ...sessionSnap.data() } : null;
     const currentDay = dayNumberForSession(session);
 
-    const markerDoc = snap.docs.find((docSnap) => docSnap.id === DAY_MARKER_ID);
-    const lastDay = markerDoc?.data().day ?? null;
-
-    if (currentDay != null && lastDay !== currentDay) {
-      const batch = writeBatch(db);
-      snap.docs.forEach((docSnap) => batch.delete(docSnap.ref));
-      batch.set(doc(db, "sessions", sessionId, "attendance", DAY_MARKER_ID), { day: currentDay });
-      await batch.commit();
-      return {};
-    }
-
-    const map = {};
-    snap.docs.forEach((docSnap) => {
-      if (docSnap.id === DAY_MARKER_ID) return;
-      map[docSnap.id] = docSnap.data().status;
-    });
-    return map;
+    // Day-tagged records avoid a destructive midnight reset racing another chair.
+    return attendanceForDay(snap.docs, currentDay);
   }
 }
 

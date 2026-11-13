@@ -6,7 +6,7 @@
   "license": "CPAL-1.0",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "node scripts/package-source.mjs && vite build",
+    "build": "node scripts/package-source.mjs && vite build && node scripts/build-offline.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "test": "vitest run"
   },

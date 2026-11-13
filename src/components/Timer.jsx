@@ -87,6 +87,14 @@ const Timer = forwardRef(function Timer({
   // to add a frame back every second.
   const countdownRef = useRef(null);
   if (countdownRef.current === null) countdownRef.current = createCountdown(initialTime);
+  const timerStateRef = useRef({ maxTime, overtime });
+  timerStateRef.current = { maxTime, overtime };
+  useEffect(() => () => {
+    const time = Date.now();
+    countdownRef.current.pause(time);
+    speechClockRef.current.pause(time);
+    onAnchorChangeRef.current({ ...countdownRef.current.anchor(), ...timerStateRef.current, running: false });
+  }, []);
 
   // Publishes an anchor to the caller (SessionBoard forwards this to
   // LiveSessionService) only at genuine transition points - start/pause,

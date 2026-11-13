@@ -8,6 +8,8 @@ import ShortcutLegend from "../components/ShortcutLegend";
 import ConferenceService from "../services/ConferenceService";
 import { useDaisShortcuts } from "../hooks/useDaisShortcuts";
 import { attendanceChanges, getDelegateState } from "../utils/attendance";
+import useCloudAttendance from "../hooks/useCloudAttendance";
+import useWorkspace from "../hooks/useWorkspace";
 
 const STATES = [
   { key: "absent", label: "Absent" },
@@ -55,7 +57,9 @@ function SegmentedToggle({ value, onChange, indeterminate = false }) {
 }
 
 export default function RollCallPage() {
+  useWorkspace();
   const committee = ConferenceService.getActiveCommittee();
+  const cloud = useCloudAttendance(committee);
   const navigate = useNavigate();
 
   // ConferenceService mutates delegate objects in place rather than emitting
@@ -94,6 +98,7 @@ export default function RollCallPage() {
     if (changes.length === 0) return;
     undoRef.current = { changes };
     ConferenceService.setAttendanceState(id, state);
+    cloud.sync([id]);
     setTick((t) => t + 1);
   }
 
@@ -113,6 +118,7 @@ export default function RollCallPage() {
     if (!action) return;
     undoRef.current = null;
     action.changes.forEach(({ id, previousState }) => ConferenceService.setAttendanceState(id, previousState));
+    cloud.sync(action.changes.map((item) => item.id));
     setTick((t) => t + 1);
   }
 
@@ -156,6 +162,7 @@ export default function RollCallPage() {
     if (changes.length === 0) return;
     undoRef.current = { changes };
     ConferenceService.setAllAttendanceState(nextState);
+    cloud.sync(delegates.map((d) => d.id));
     setTick((t) => t + 1);
   }
 
@@ -168,6 +175,8 @@ export default function RollCallPage() {
         onShowShortcuts={() => setLegendOpen(true)}
       />
       <div className="mx-auto max-w-3xl p-8">
+        {cloud.status && <div role="status" className="notice">{cloud.status}{cloud.connected && <button className="quiet-button" onClick={cloud.disconnect}>Use local attendance</button>}</div>}
+        {cloud.error && <p role="alert" className="notice error">{cloud.error}</p>}
 
         <div className="mb-6 flex items-center gap-6 border border-[var(--app-border)] bg-[var(--app-panel)] p-6">
           <div>

@@ -9,6 +9,7 @@ import ConferenceService from "../services/ConferenceService";
 import LiveSessionService from "../services/LiveSessionService";
 import { useDaisShortcuts } from "../hooks/useDaisShortcuts";
 import { Undo2 } from "lucide-react";
+import { publicPresenterState } from "../services/desk";
 
 // Shared by the real /session route and the landing page's hero preview,
 // which sits outside .app-shell. `linked` enables real navigation only on the
@@ -34,6 +35,7 @@ export default function SessionBoard({
   const [queue, setQueue] = useState(() =>
     initialSpeaker ? [initialSpeaker, ...initialQueue] : initialQueue
   );
+  const [presenterCommitteeId] = useState(() => ConferenceService.getActiveCommitteeId());
   const currentSpeaker = queue[0] ?? null;
   const [history, setHistory] = useState(initialHistory);
   // Tracked by id, not position, so the selection follows the delegate when
@@ -90,9 +92,10 @@ export default function SessionBoard({
   const liveSessionId = LiveSessionService.getActiveSessionId();
 
   useEffect(() => {
+    if (linked) publicPresenterState(presenterCommitteeId, { currentSpeaker, queue, activeMotionLabel: activeMotion });
     if (!liveSessionId) return;
     LiveSessionService.publish(liveSessionId, { currentSpeaker, queue });
-  }, [liveSessionId, currentSpeaker, queue]);
+  }, [liveSessionId, currentSpeaker, queue, activeMotion, linked]);
 
   // The one function both the mouse "Next" button and the keyboard shortcut
   // (via Timer's triggerNext) funnel through, so snapshotting here covers
@@ -189,7 +192,10 @@ export default function SessionBoard({
               onNext={nextSpeaker}
               showNext
               nextDisabled={!currentSpeaker}
-              onAnchorChange={(anchor) => liveSessionId && LiveSessionService.publishTimerAnchor(liveSessionId, anchor)}
+              onAnchorChange={(anchor) => {
+                if (linked) publicPresenterState(presenterCommitteeId, { timer: anchor });
+                if (liveSessionId) LiveSessionService.publishTimerAnchor(liveSessionId, anchor);
+              }}
             />
           </div>
 

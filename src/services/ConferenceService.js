@@ -354,7 +354,7 @@ class ConferenceService {
     if (!delegate) return false;
 
     delegate.present = state !== "absent";
-    delegate.voting = state === "voting";
+    delegate.voting = state === "voting" && !delegate.observer;
     this.persist();
 
     return true;
@@ -363,7 +363,7 @@ class ConferenceService {
   setAllAttendanceState(state) {
     this.getDelegates().forEach((delegate) => {
       delegate.present = state !== "absent";
-      delegate.voting = state === "voting";
+      delegate.voting = state === "voting" && !delegate.observer;
     });
     this.persist();
   }

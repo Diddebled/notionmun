@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { ArrowUpRight, Menu, Sprout } from "lucide-react";
+import { ArrowUpRight, Menu, Search, Sprout } from "lucide-react";
 import Logo from "./Logo";
 import Dialog from "./Dialog";
 import { WORKSPACE_PAGES, WORKSPACE_TOOLS } from "../navigation";
 import { BRAND } from "../brand";
+import WorkspaceStatus from "./WorkspaceStatus";
 
 function Navigation({ onNavigate }) {
   return <>
@@ -33,10 +34,11 @@ export default function WorkspaceNav() {
     <aside className="notion-sidebar">
       <Link to="/" className="sidebar-brand" aria-label={`${BRAND.name} home`}><Logo /></Link>
       <div className="sidebar-workspace"><span className="workspace-symbol"><Sprout size={16} /></span><div><strong>Committee workspace</strong><span>Chair's edition</span></div></div>
-      <Navigation />
-      <div className="sidebar-bottom"><span className="sidebar-rule" /><p>{BRAND.tagline}</p><Link to="/licensing">Credits & license<ArrowUpRight size={13} /></Link></div>
+      <button className="sidebar-find" onClick={() => window.dispatchEvent(new Event("notionmun:find"))}><Search size={15} />Quick find<kbd>Ctrl K</kbd></button>
+      <div className="notion-nav-scroll"><Navigation /></div>
+      <div className="sidebar-bottom"><WorkspaceStatus /><span className="sidebar-rule" /><p>{BRAND.tagline}</p><Link to="/licensing">Credits & license<ArrowUpRight size={13} /></Link></div>
     </aside>
     <header className="notion-mobile-header"><Link to="/" aria-label={`${BRAND.name} home`}><Logo /></Link><span>{page?.label || "Workspace"}</span><button className="icon-button" title="Open navigation" aria-label="Open navigation" onClick={() => setOpen(true)}><Menu size={21} /></button></header>
-    {open && <Dialog title="Your workspace" className="navigation-dialog" onClose={() => setOpen(false)}><Logo /><Navigation onNavigate={() => setOpen(false)} /></Dialog>}
+    {open && <Dialog title="Your workspace" className="navigation-dialog" onClose={() => setOpen(false)}><Logo /><Navigation onNavigate={() => setOpen(false)} /><WorkspaceStatus /></Dialog>}
   </>;
 }

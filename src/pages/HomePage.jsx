@@ -8,6 +8,7 @@ import VenuePhoto from "../components/VenuePhoto";
 import BrandQuote from "../components/BrandQuote";
 import ConferenceService from "../services/ConferenceService";
 import { createBackup, downloadFile, loadSampleConference, restoreBackup } from "../services/workspace";
+import { saveRecovery } from "../services/desk";
 import { dais } from "../utils/storage";
 import { motionVoteKey, speakersKey } from "../committeeCaches";
 import { BRAND } from "../brand";
@@ -55,7 +56,7 @@ export default function HomePage() {
       if (file.size > 10 * 1024 * 1024) throw new Error("Backups are limited to 10 MB.");
       const data = JSON.parse(await file.text());
       if (!window.confirm("Replace the current workspace with this backup?")) return;
-      restoreBackup(data); refresh((n) => n + 1); setMessage("Workspace restored.");
+      saveRecovery("Before restoring a backup"); restoreBackup(data); refresh((n) => n + 1); setMessage("Workspace restored.");
     } catch (err) { setError(err.message || "This backup could not be restored."); }
   }
 
@@ -122,7 +123,7 @@ export default function HomePage() {
         </aside>
       </div>
     </main>
-    {pending && <Dialog title="Choose a committee" onClose={() => setPending(null)}><p className="muted">{pending.name}</p><div className="picker-list">{Object.values(pending.committees).map((item) => <button key={item.id} onClick={() => { ConferenceService.commitConference(pending, item.id); setPending(null); refresh((n) => n + 1); setMessage('Conference imported.'); }}><span>{item.committee}</span><span>{item.delegates.length} delegates<ChevronRight size={16} /></span></button>)}</div></Dialog>}
-    {samplePicker && <Dialog title="Load sample conference" onClose={() => setSamplePicker(false)}><div className="picker-list">{['United Nations Security Council', 'SOCHUM'].map((name, index) => <button key={name} onClick={() => { if (!window.confirm('Replace the current workspace with sample data?')) return; loadSampleConference(index); setSamplePicker(false); refresh((n) => n + 1); }}><span>{name}</span><RotateCcw size={16} /></button>)}</div></Dialog>}
+    {pending && <Dialog title="Choose a committee" onClose={() => setPending(null)}><p className="muted">{pending.name}</p><div className="picker-list">{Object.values(pending.committees).map((item) => <button key={item.id} onClick={() => { saveRecovery("Before importing a conference"); ConferenceService.commitConference(pending, item.id); setPending(null); refresh((n) => n + 1); setMessage('Conference imported.'); }}><span>{item.committee}</span><span>{item.delegates.length} delegates<ChevronRight size={16} /></span></button>)}</div></Dialog>}
+    {samplePicker && <Dialog title="Load sample conference" onClose={() => setSamplePicker(false)}><div className="picker-list">{['United Nations Security Council', 'SOCHUM'].map((name, index) => <button key={name} onClick={() => { if (!window.confirm('Replace the current workspace with sample data?')) return; saveRecovery("Before loading sample data"); loadSampleConference(index); setSamplePicker(false); refresh((n) => n + 1); }}><span>{name}</span><RotateCcw size={16} /></button>)}</div></Dialog>}
   </div>;
 }

@@ -28,13 +28,24 @@ Open http://127.0.0.1:8001. The Python server only binds to localhost.
 
 ## Integrated workflows
 
+The Phase 1 chair tools and Phase 2 committee presets are implemented. Phase 3
+includes local conference tools and reporting, plus optional Firebase shared
+attendance and delegate broadcasts. Full collaborative document editing is a
+separate extension. See [FEATURES.md](FEATURES.md) for the exact scope and limits.
+
 - Excel conference workbooks and CSV/TSV rosters, with committee selection.
 - Three-state roll call, bulk confirmation, keyboard navigation and undo.
 - Speakers list with reorder, undo, drift-resistant timers and speaking statistics.
 - Natural-language and structured motion entry, precedence, editable presets and voting.
 - Seat-chart vote tally, simple/two-thirds/absolute majority calculations.
-- Resolution editing, status, presentation, print and text download.
-- Persistent local work, JSON backup/restore and CSV session reports.
+- Recorded roll-call ballots with quorum, pass resolution, vote history and linked resolutions.
+- Resolution autosave, amendments, revision history, presentation, print and text/Markdown download.
+- Seven committee presets and reusable custom committee templates.
+- Manual conference, committee and delegation editing; agenda, bulletin and directory.
+- Persistent local work, workspace library, automatic recovery and JSON backup/restore.
+- Attendance snapshots, speaking metrics and conference-wide CSV reports.
+- Offline application caching and a same-device presenter display.
+- Local feedback notebook, share links/QR codes, diagnostics and quick find.
 - Chair's notes saved per committee and included in workspace backups.
 - Light/dark/brown themes, reduced motion and configurable keyboard shortcuts.
 
@@ -88,6 +99,10 @@ Browser data remains private to each browser and origin. Export a JSON backup
 from localhost and restore it on the public site to move existing work there.
 Cloud collaboration is not enabled by hosting alone.
 
+After the first successful online visit, the service worker caches the application
+and lazy-loaded features for offline use. The sidebar (or mobile navigation) shows
+offline readiness and available updates. Keep regular downloaded backups.
+
 ## Optional cloud services
 
 No Firebase credentials or telemetry are bundled. Cloud Sessions displays an
@@ -95,6 +110,15 @@ unavailable state until the `VITE_FIREBASE_*` variables from `.env.example` are
 configured in `.env.local` and the app is rebuilt. Firebase authentication,
 authorized domains, and Firestore rules must also be configured and tested for
 your own project. Core committee workflows do not require an account.
+
+The Vite variables are `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`,
+`VITE_FIREBASE_PROJECT_ID`, `VITE_FIREBASE_STORAGE_BUCKET`,
+`VITE_FIREBASE_MESSAGING_SENDER_ID`, and `VITE_FIREBASE_APP_ID`.
+Optional `VITE_OWNER_EMAILS` is a comma-separated owner UI allowlist; verified
+emails are required and backend access must be enforced independently by rules.
+On Cloud Sessions, invite collaborators by their Firebase UID. Each chair imports
+the same roster and explicitly connects shared attendance to their committee.
+Use Go Live for the read-only delegate queue/timer broadcast.
 
 No supplied admin endpoints, notification/email services, or deployment hooks
 are enabled by this local integration.

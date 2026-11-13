@@ -26,15 +26,18 @@ function prefsDocRef(uid) {
 let currentUid = null;
 let pending = {};
 let pushTimer = null;
+let authGeneration = 0;
 const PUSH_DEBOUNCE_MS = 1000;
 
 function schedulePush(patch) {
   if (!currentUid) return;
   const uid = currentUid;
+  const generation = authGeneration;
   pending = { ...pending, ...patch };
 
   clearTimeout(pushTimer);
   pushTimer = setTimeout(async () => {
+    if (uid !== currentUid || generation !== authGeneration) return;
     const toWrite = pending;
     pending = {};
     try {
@@ -54,9 +57,12 @@ function schedulePush(patch) {
 // as a fresh sign-in again). No doc: first sign-in anywhere, so push local up
 // rather than wiping a guest's edits.
 async function handleSignIn(uid, { reload }) {
+  const generation = ++authGeneration;
+  clearTimeout(pushTimer); pending = {};
   currentUid = uid;
   try {
     const snap = await getDoc(prefsDocRef(uid));
+    if (currentUid !== uid || generation !== authGeneration) return;
     if (snap.exists()) {
       const data = snap.data();
       if (data.motions) replaceMotions(data.motions);
@@ -78,6 +84,8 @@ async function handleSignIn(uid, { reload }) {
 // computer (signing in as themselves, or staying a guest) starts clean
 // instead of inheriting whoever was last signed in.
 function handleSignOut() {
+  ++authGeneration;
+  clearTimeout(pushTimer); pushTimer = null; pending = {};
   currentUid = null;
   resetMotions();
   resetAllShortcuts();
@@ -105,6 +113,7 @@ export function initPrefsSync() {
     if (AuthService.isReady()) hasSeenFirstResolution = true;
 
     if (user && user.uid !== previousUid) {
+      if (previousUid !== null) handleSignOut();
       previousUid = user.uid;
       handleSignIn(user.uid, { reload: !isColdRestore });
     } else if (!user && previousUid !== null) {

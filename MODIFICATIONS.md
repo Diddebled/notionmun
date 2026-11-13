@@ -41,6 +41,24 @@ License: Common Public Attribution License 1.0, reproduced in LICENSE.
 - Added GitHub Pages deployment with repository-relative assets, reloadable hash
   navigation, and session links that retain their private login fragments.
 
+## 2026-11-11
+
+- Audited the newly supplied Motion archive against the integrated workspace.
+- Added manual conference/roster editing, committee presets, agenda/calendar,
+  a bulletin board, a local conference directory and registration statuses.
+- Added roll-call ballots with attendance quorum, abstention checks, resolved
+  passes, saved vote rosters and linked resolution outcomes.
+- Added resolution autosave, amendments, revision history and Markdown export.
+- Added workspace libraries, recovery snapshots, preference backup, offline
+  application caching, install/update controls and a same-device presenter.
+- Added conference-wide reporting, attendance history, activity exports,
+  local feedback, sharing tools, diagnostics and command search.
+- Improved optional cloud attendance, day-tagged records, account isolation,
+  broadcast stopping/deletion and server access checks. Original infrastructure,
+  owner emails, email notifications and telemetry remain disconnected.
+- Added regression coverage and documented implemented/configuration-dependent
+  behavior in FEATURES.md. Preserved source and artwork attribution.
+
 Except for the user-supplied quotation displayed as provided, these modifications
 do not imply endorsement by the original developer. The quotation has not been
 independently verified.
